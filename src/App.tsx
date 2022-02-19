@@ -25,7 +25,7 @@ function App() {
     <div className='App'>
       <Desktop>Desktop</Desktop>
       <Tablet>
-        <div>하이</div>
+        <div>아니야</div>
       </Tablet>
       <Mobile>Mobile</Mobile>
       {/* <Default>Not mobile</Default> */}
