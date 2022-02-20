@@ -9,7 +9,7 @@ const LOGIN_FAIL = 'auth/LOGIN_FAIL';
 const LOGOUT = 'auth/LOGOUT';
 
 //액션 생성 함수
-export const register = (input: string) => (dispatch: any) => {
+export const register = input => dispatch => {
   return authAPI.register(input).then(
     response => {
       dispatch({ type: REGISTER_SUCCESS });
@@ -21,7 +21,7 @@ export const register = (input: string) => (dispatch: any) => {
     },
   );
 };
-export const login = (input: string) => (dispatch: any) => {
+export const login = input => dispatch => {
   return authAPI.login(input).then(
     response => {
       dispatch({
@@ -36,15 +36,15 @@ export const login = (input: string) => (dispatch: any) => {
     },
   );
 };
-export const logout = () => (dispatch: any) => {
+export const logout = () => dispatch => {
   authAPI.logout();
   dispatch({ type: LOGOUT });
 };
 
 //reducer
-const user = JSON.parse(localStorage.getItem('user') || '');
+const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user ? { isLoggedIn: true, user } : { isLoggedIn: false, user: null };
-export default function (state = initialState, action: AnyAction) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case REGISTER_SUCCESS:
       return {
