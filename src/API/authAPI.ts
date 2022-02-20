@@ -1,9 +1,10 @@
-import { plainRequest } from './API';
+import axios from 'axios';
+const API_URL = 'https://';
 
-class authAPI {
+class AuthService {
   register = async (input: string) => {
     try {
-      const response = await plainRequest.post('/', input);
+      const response = await axios.post(API_URL + 'register', input);
       return response.data.token;
     } catch (e) {
       return Promise.reject(e);
@@ -12,7 +13,7 @@ class authAPI {
 
   login = async (input: string) => {
     try {
-      const response = await plainRequest.post('/', input);
+      const response = await axios.post(API_URL + 'signin', input);
       localStorage.setItem('user', JSON.stringify(response.data));
       return response.data.token;
     } catch (e) {
@@ -24,4 +25,4 @@ class authAPI {
   };
 }
 
-export default new authAPI();
+export default new AuthService();

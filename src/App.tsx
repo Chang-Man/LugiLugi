@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { useMediaQuery } from 'react-responsive';
+import { useSelector } from 'react-redux';
 
 const Desktop = ({ children }: any) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -12,6 +13,7 @@ const Mobile = ({ children }: any) => {
 };
 
 function App() {
+  // const auth = useSelector().isLoggedIn;
   return (
     <div className='App'>
       <Desktop>Desktop</Desktop>
