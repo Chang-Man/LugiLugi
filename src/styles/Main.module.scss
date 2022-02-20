@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .logo {
+    width: 60vw;
+    margin-bottom: 40px;
+  }
+  button {
+    margin-top: 20px;
+    height: 8vh;
+    font-size: large;
+    font-weight: bold;
+  }
+}

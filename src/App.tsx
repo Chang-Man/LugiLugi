@@ -3,8 +3,8 @@ import './App.css';
 import { useMediaQuery } from 'react-responsive';
 import { useSelector } from 'react-redux';
 import rootReducer from './redux';
-import Login from './components/login/Login';
-import styles from './scss/layout/mobile.module.scss';
+import styles from './styles/mobile.module.scss';
+import Main from './components/login/Main';
 
 const Desktop = ({ children }: any) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -23,12 +23,12 @@ function App() {
     vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }, []);
-  const auth = useSelector((state: RootState) => state.auth);
+  const auth = useSelector((state: RootState) => state.auth).isLoggedIn;
   return (
     <div className='App'>
       <Desktop>으악</Desktop>
       <Mobile>
-        <div className={styles.container}>{auth ? <div /> : <Login />}</div>
+        <div className={styles.container}>{auth ? <div /> : <Main />}</div>
       </Mobile>
     </div>
   );
