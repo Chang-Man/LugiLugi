@@ -71,4 +71,12 @@
     height: 30vh;
     background-color: red;
   }
+  .invite {
+    position: fixed;
+    font-size: 30px;
+    height: auto;
+    width: fit-content;
+    display: inline-block;
+    transform: rotate(90deg);
+  }
 }

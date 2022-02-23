@@ -12,6 +12,7 @@ import Main from './components/main/Main';
 import MakeLugi from './components/makelugi/MakeLugi';
 import JoinLugi from './components/JoinLugi';
 import ScoreBoard from './components/ScoreBoard';
+import Subref from './components/Subref';
 
 const Desktop = ({ children }: any) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -40,7 +41,7 @@ function App() {
             <div />
           ) : (
             <Routes>
-              <Route path='/' element={<ScoreBoard />} />
+              <Route path='/' element={<Subref />} />
               <Route path='/regisster' element={<Register />} />
               <Route path='/register' element={<ProfileRegister />} />
               <Route path='/makelugi' element={<MakeLugi />} />

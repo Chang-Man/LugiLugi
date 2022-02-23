@@ -5,7 +5,7 @@ const ScoreBoard = () => {
     <div className={styles.container}>
       <Warning />
       <div className={`${styles.scoreContainer} ${styles.blue} `}>
-        <div className={styles.score}>0</div>
+        <div className={styles.score}>1</div>
         <div className={styles.name}>김창아</div>
       </div>
       <div className={styles.timer}>1:30</div>
@@ -15,6 +15,7 @@ const ScoreBoard = () => {
         <div className={styles.name}>배준서</div>
       </div>
       <Warning />
+      <button className={styles.invite}>초대하기</button>
     </div>
   );
 };
