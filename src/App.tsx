@@ -4,7 +4,14 @@ import { useMediaQuery } from 'react-responsive';
 import { useSelector } from 'react-redux';
 import rootReducer from './redux';
 import styles from './styles/mobile.module.scss';
-import Main from './components/login/Main';
+import { Route, Routes } from 'react-router-dom';
+import Login from './components/login/Login';
+import Register from './components/login/Register';
+import ProfileRegister from './components/login/ProfileRegister';
+import Main from './components/main/Main';
+import MakeLugi from './components/makelugi/MakeLugi';
+import JoinLugi from './components/JoinLugi';
+import ScoreBoard from './components/ScoreBoard';
 
 const Desktop = ({ children }: any) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -26,9 +33,21 @@ function App() {
   const auth = useSelector((state: RootState) => state.auth).isLoggedIn;
   return (
     <div className='App'>
-      <Desktop>으악</Desktop>
+      <Desktop></Desktop>
       <Mobile>
-        <div className={styles.container}>{auth ? <div /> : <Main />}</div>
+        <div className={styles.container}>
+          {auth ? (
+            <div />
+          ) : (
+            <Routes>
+              <Route path='/' element={<ScoreBoard />} />
+              <Route path='/regisster' element={<Register />} />
+              <Route path='/register' element={<ProfileRegister />} />
+              <Route path='/makelugi' element={<MakeLugi />} />
+              <Route path='/joinLugi' element={<JoinLugi />} />
+            </Routes>
+          )}
+        </div>
       </Mobile>
     </div>
   );
