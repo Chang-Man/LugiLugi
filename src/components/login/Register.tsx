@@ -46,7 +46,7 @@ const Register = () => {
       <form className={styles.inputs}>
         <input placeholder='이름' onChange={e => changeRegisterInput('name', e.target.value)} value={registerInput.name} />
         <input placeholder='생년월일' onChange={e => changeRegisterInput('birthday', e.target.value)} value={registerInput.birthday} />
-        <input placeholder='email' onChange={e => changeRegisterInput('userId', e.target.value)} value={registerInput.userId} />
+        <input placeholder='이메일' onChange={e => changeRegisterInput('userId', e.target.value)} value={registerInput.userId} />
         <input placeholder='비밀번호' onChange={e => changeRegisterInput('password1', e.target.value)} value={registerInput.password1} />
         <input
           placeholder='비밀번호 확인'

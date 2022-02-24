@@ -1,45 +1,75 @@
 .container {
-  width: 60vw;
+  width: 70vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  .profile {
-    position: absolute;
+  .header {
+    position: fixed;
+    left: 0;
     top: 0;
-    left: 0;
+    box-sizing: border-box;
+    padding: 20px;
     width: 100%;
-    height: 25%;
-    background-color: aqua;
-  }
-
-  button {
-    color: white;
-    margin-bottom: 10%;
-    background-color: #030303;
-    border-radius: 20px;
-    border: none;
-    width: 60vw;
-    height: 10vh;
-    font-size: large;
-    font-weight: bold;
-  }
-
-  .footer {
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    width: 100%;
-    height: 8%;
-    background-color: black;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    img {
-      width: 15%;
+    justify-content: space-between;
+    .logos {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      font-family: RussoOne;
+      color: white;
+      font-size: 5vw;
+      .logo {
+        width: 10%;
+        margin-right: 5%;
+      }
     }
-    span {
-      color: gray;
-      font-weight: bold;
+    .status {
+      display: flex;
+      align-items: center;
+      .profile {
+        color: white;
+        margin-right: 20px;
+      }
+      .menu {
+        color: white;
+      }
+    }
+  }
+  .profile {
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+    .userImg {
+      display: inline-block;
+      width: 40vw;
+      height: 40vw;
+      border-radius: 40vw;
+      margin-right: 15%;
+      background-color: white;
+    }
+    .userTxt {
+      font-size: 4vw;
+      color: white;
+      display: inline-block;
+      .userLabel {
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .user {
+        margin-left: 20%;
+      }
+      .code {
+        margin-left: 20%;
+      }
+    }
+  }
+  .menus {
+    width: auto;
+    margin-top: 10%;
+    img {
+      width: 100%;
+      margin-bottom: 5%;
     }
   }
 }
