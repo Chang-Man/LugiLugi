@@ -1,8 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { RegisterInputType, RegisterKeyType } from '../../interface/interface';
 import styles from '../../styles/Register.module.scss';
+import { FaArrowLeft } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const setBithForm = () => {
+    if (registerInput.birthday) {
+      if (registerInput.birthday.length === 5 && registerInput.birthday.charAt(registerInput.birthday.length - 1) !== '/') {
+        setRegisterInput({
+          ...registerInput,
+          birthday: registerInput.birthday.replace(/(.{4})/g, '$1/'),
+        });
+      }
+      if (registerInput.birthday.length === 8 && registerInput.birthday.charAt(registerInput.birthday.length - 1) !== '/') {
+        setRegisterInput({
+          ...registerInput,
+          birthday: registerInput.birthday.replace(/(.{7})/g, '$1/'),
+        });
+      }
+      if (registerInput.birthday.length > 10) setRegisterInput({ ...registerInput, birthday: '' });
+    }
+  };
+
   const [registerInput, setRegisterInput] = useState<RegisterInputType>({
     userId: '',
     password1: '',
@@ -13,88 +33,29 @@ const Register = () => {
   const changeRegisterInput = (key: RegisterKeyType, input: string) => {
     setRegisterInput({ ...registerInput, [key]: input });
   };
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    setBithForm();
+  }, [registerInput.birthday]);
   return (
-    <form className={styles.container}>
-      <span>아이디</span>
-      <input onChange={e => changeRegisterInput('userId', e.target.value)} value={registerInput.userId} />
-      <span>비밀번호</span>
-      <input type='password' onChange={e => changeRegisterInput('password1', e.target.value)} value={registerInput.password1} />
-      <span>비밀번호 재확인</span>
-      <input type='password' onChange={e => changeRegisterInput('password2', e.target.value)} value={registerInput.password2} />
-      <span>이름</span>
-      <input onChange={e => changeRegisterInput('name', e.target.value)} value={registerInput.name} />
-      <span>생년월일</span>
-      <div className={styles.birth_container}>
-        <input className={`${styles.birth} ${styles.year}`} name='year' placeholder='년' />
-        <select className={`${styles.birth} ${styles.month}`} name='month'>
-          <option value='1월'>1월</option>
-          <option value='2월'>2월</option>
-          <option value='3월'>3월</option>
-          <option value='4월'>4월</option>
-          <option value='5월'>5월</option>
-          <option value='6월'>6월</option>
-          <option value='7월'>7월</option>
-          <option value='8월'>8월</option>
-          <option value='9월'>9월</option>
-          <option value='10월'>10월</option>
-          <option value='11월'>11월</option>
-          <option value='12월'>12월</option>
-        </select>
-        <input className={`${styles.birth} ${styles.day}`} name='day' placeholder='일' />
+    <div className={styles.container}>
+      <div className={styles.navigationBar}>
+        <FaArrowLeft className={styles.arrow} onClick={() => navigate(-1)} />
+        SIGN UP
       </div>
-      <button>회원가입</button>
-    </form>
+      <form className={styles.inputs}>
+        <input placeholder='이름' onChange={e => changeRegisterInput('name', e.target.value)} value={registerInput.name} />
+        <input placeholder='생년월일' onChange={e => changeRegisterInput('birthday', e.target.value)} value={registerInput.birthday} />
+        <input placeholder='email' onChange={e => changeRegisterInput('userId', e.target.value)} value={registerInput.userId} />
+        <input placeholder='비밀번호' onChange={e => changeRegisterInput('password1', e.target.value)} value={registerInput.password1} />
+        <input
+          placeholder='비밀번호 확인'
+          onChange={e => changeRegisterInput('password2', e.target.value)}
+          value={registerInput.password2}
+        />
+        <button onClick={() => navigate('/')}>회원가입</button>
+      </form>
+    </div>
   );
 };
 export default Register;
-
-// const customStyles = {
-//   container: (provided) => ({
-//     ...provided,
-//     display: 'inline-block',
-//     width: '250px',
-//     minHeight: '1px',
-//     textAlign: 'left',
-//     border: 'none',
-//   }),
-//   control: (provided) => ({
-//     ...provided,
-//     border: '2px solid #757575',
-//     borderRadius: '0',
-//     minHeight: '1px',
-//     height: '42px',
-//   }),
-//   input: (provided) => ({
-//     ...provided,
-//     minHeight: '1px',
-//   }),
-//   dropdownIndicator: (provided) => ({
-//     ...provided,
-//     minHeight: '1px',
-//     paddingTop: '0',
-//     paddingBottom: '0',
-//     color: '#757575',
-//   }),
-//   indicatorSeparator: (provided) => ({
-//     ...provided,
-//     minHeight: '1px',
-//     height: '24px',
-//   }),
-//   clearIndicator: (provided) => ({
-//     ...provided,
-//     minHeight: '1px',
-//   }),
-//   valueContainer: (provided) => ({
-//     ...provided,
-//     minHeight: '1px',
-//     height: '40px',
-//     paddingTop: '0',
-//     paddingBottom: '0',
-//   }),
-//   singleValue: (provided) => ({
-//     ...provided,
-//     minHeight: '1px',
-//     paddingBottom: '2px',
-//   }),
-// };

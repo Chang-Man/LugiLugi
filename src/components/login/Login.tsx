@@ -13,11 +13,16 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <img className={styles.logo} src={Logo} alt='logo' />
+      <span>LUGI-LUGI</span>
       <div className={styles.inputs}>
-        <input placeholder='아이디' />
-        <input placeholder='비밀번호' type='password' />
-        <button>로그인</button>
-        <button onClick={onClickRegister}>회원가입</button>
+        <input placeholder='EMAIL' />
+        <input placeholder='PASSWORD' type='password' />
+        <button className={styles.login} onClick={() => navigate('/main')}>
+          LOGIN
+        </button>
+        <div className={styles.register} onClick={onClickRegister}>
+          REGISTER
+        </div>
       </div>
     </div>
   );

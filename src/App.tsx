@@ -41,9 +41,10 @@ function App() {
             <div />
           ) : (
             <Routes>
-              <Route path='/' element={<Subref />} />
-              <Route path='/regisster' element={<Register />} />
-              <Route path='/register' element={<ProfileRegister />} />
+              <Route path='/' element={<Login />} />
+              <Route path='/main' element={<Main />} />
+              <Route path='/register' element={<Register />} />
+              <Route path='/regisdter' element={<ProfileRegister />} />
               <Route path='/makelugi' element={<MakeLugi />} />
               <Route path='/joinLugi' element={<JoinLugi />} />
             </Routes>
