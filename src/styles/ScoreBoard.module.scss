@@ -1,0 +1,82 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  .warningContainer {
+    display: flex;
+    color: white;
+    margin-left: 20px;
+    .warningTxt {
+      font-size: 3vh;
+      transform: rotate(90deg);
+    }
+    .warning {
+      font-size: 3vh;
+      transform: rotate(90deg);
+    }
+  }
+  .scoreContainer {
+    width: 90vw;
+    height: 30vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+
+    .name {
+      font-size: 7vh;
+      display: inline-block;
+      transform: rotate(90deg);
+    }
+    .score {
+      font-size: 10vh;
+      font-weight: bold;
+      display: inline-block;
+      margin-right: 20px;
+      transform: rotate(90deg);
+    }
+  }
+  .blue {
+    background-color: blue;
+  }
+  .red {
+    background-color: red;
+  }
+  .timer {
+    font-size: 10vh;
+    background-color: yellow;
+    position: absolute;
+    color: black;
+    transform: rotate(90deg);
+    left: 50%;
+  }
+  .roundTxt {
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+
+    color: white;
+    font-weight: bold;
+    font-size: 7vh;
+    // background-color: red;
+    transform: rotate(90deg);
+  }
+  .redContainer {
+    // position: absolute;
+    // left: 0;
+    // bottom: 10%;
+    width: 90vw;
+    height: 30vh;
+    background-color: red;
+  }
+  .invite {
+    position: fixed;
+    font-size: 30px;
+    height: auto;
+    width: fit-content;
+    display: inline-block;
+    transform: rotate(90deg);
+  }
+}
