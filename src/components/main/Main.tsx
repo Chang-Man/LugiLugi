@@ -6,8 +6,16 @@ import joinGame from '../../public/joinGame.png';
 import gameLog from '../../public/gameLog.png';
 import { useNavigate } from 'react-router-dom';
 import { BsPerson, BsThreeDotsVertical } from 'react-icons/bs';
+import authAPI from '../../API/authAPI';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/auth';
 const Main = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const onClickLogout = () => {
+    authAPI.logout();
+    dispatch(logout());
+  };
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -16,8 +24,8 @@ const Main = () => {
           <span>LUGI-LUGI</span>
         </div>
         <div className={styles.status}>
-          <BsPerson className={styles.profile} size={'1.5em'} />
-          <BsThreeDotsVertical className={styles.menu} size={'1.5em'} />
+          <BsPerson className={styles.profile} size={'1.5em'} onClick={() => navigate('/profile')} />
+          <BsThreeDotsVertical className={styles.menu} size={'1.5em'} onClick={onClickLogout} />
         </div>
       </div>
       <div className={styles.profile}>

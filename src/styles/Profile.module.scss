@@ -1,0 +1,58 @@
+@import './mixins.scss';
+.container {
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .navigationBar {
+      @include navigationBar-default;
+      .arrow {
+        color: white;
+        position: fixed;
+        left: 5%;
+      }
+    }
+    .userImg {
+      width: 40vw;
+      height: 40vw;
+      border-radius: 40vw;
+      background-color: white;
+      margin-bottom: 10%;
+    }
+    @include input-default;
+    input {
+      width: 100%;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 10%;
+    }
+    button {
+      @include button-default;
+      width: 60%;
+      font-size: 6vw;
+      margin-top: 10%;
+    }
+    select {
+      background-color: transparent;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      color: rgba(255, 255, 255, 0.5);
+      width: 100%;
+      border-bottom: 2px solid;
+      margin-bottom: 10%;
+    }
+    select:focus {
+      outline: none;
+    }
+    .noGroup {
+      color: white;
+      font-size: 80%;
+      margin-bottom: 10%;
+    }
+  }
+}

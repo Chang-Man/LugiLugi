@@ -1,20 +1,21 @@
 import axios from 'axios';
-const API_URL = 'https://';
+import { LoginPostType, RegisterPostType } from '../interface/interface';
+const API_URL = 'http://3.36.71.201:8080/api/v1/user';
 
 class AuthService {
-  register = async (input: string) => {
+  register = async (input: RegisterPostType) => {
     try {
-      const response = await axios.post(API_URL + 'register', input);
-      return response.data.token;
+      const response = await axios.post(API_URL + '/signup/', input);
+      return response.data;
     } catch (e) {
       return Promise.reject(e);
     }
   };
 
-  login = async (input: string) => {
+  login = async (input: LoginPostType) => {
     try {
-      const response = await axios.post(API_URL + 'signin', input);
-      localStorage.setItem('user', JSON.stringify(response.data));
+      const response = await axios.post(API_URL + '/signin/', input);
+      localStorage.setItem('user', JSON.stringify(response.data.token));
       return response.data.token;
     } catch (e) {
       return Promise.reject(e);
