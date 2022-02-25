@@ -1,23 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../../styles/Login.module.scss';
 import Logo from '../../public/tkdmark.jpg';
 import { useNavigate } from 'react-router-dom';
+import authAPI from '../../API/authAPI';
+import { LoginPostType } from '../../interface/interface';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/auth';
+
 const Login = () => {
+  const [loginInput, setLoginInput] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onClicklogin = () => {
-    navigate('/');
+    authAPI.login(loginInput).then(
+      token => {
+        dispatch(login(token));
+      },
+      error => {
+        alert('로그인 정보를 다시 입력하세요');
+      },
+    );
   };
   const onClickRegister = () => {
     navigate('/register');
   };
+
   return (
     <div className={styles.container}>
       <img className={styles.logo} src={Logo} alt='logo' />
       <span>LUGI-LUGI</span>
       <div className={styles.inputs}>
-        <input placeholder='EMAIL' />
-        <input placeholder='PASSWORD' type='password' />
-        <button className={styles.login} onClick={() => navigate('/main')}>
+        <input placeholder='EMAIL' value={loginInput.email} onChange={e => setLoginInput({ ...loginInput, email: e.target.value })} />
+        <input
+          placeholder='PASSWORD'
+          type='password'
+          value={loginInput.password}
+          onChange={e => setLoginInput({ ...loginInput, password: e.target.value })}
+        />
+        <button className={styles.login} onClick={onClicklogin}>
           LOGIN
         </button>
         <div className={styles.register} onClick={onClickRegister}>

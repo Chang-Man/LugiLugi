@@ -7,7 +7,7 @@ import styles from './styles/mobile.module.scss';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/login/Login';
 import Register from './components/login/Register';
-import ProfileRegister from './components/login/ProfileRegister';
+import Profile from './components/profile/Profile';
 import Main from './components/main/Main';
 import MakeLugi from './components/makelugi/MakeLugi';
 import JoinLugi from './components/JoinLugi';
@@ -38,15 +38,16 @@ function App() {
       <Mobile>
         <div className={styles.container}>
           {auth ? (
-            <div />
+            <Routes>
+              <Route path='/' element={<Main />} />
+              <Route path='/profile' element={<Profile />} />
+              <Route path='/makelugi' element={<MakeLugi />} />
+              <Route path='/joinLugi' element={<JoinLugi />} />
+            </Routes>
           ) : (
             <Routes>
               <Route path='/' element={<Login />} />
-              <Route path='/main' element={<Main />} />
               <Route path='/register' element={<Register />} />
-              <Route path='/regisdter' element={<ProfileRegister />} />
-              <Route path='/makelugi' element={<MakeLugi />} />
-              <Route path='/joinLugi' element={<JoinLugi />} />
             </Routes>
           )}
         </div>

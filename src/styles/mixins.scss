@@ -16,3 +16,20 @@
   border-radius: 30px;
   color: white;
 }
+
+@mixin navigationBar-default {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  height: 10%;
+  background-color: rgba(101, 101, 121, 0.5);
+  font-family: RussoOne;
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  font-size: 7vw;
+}

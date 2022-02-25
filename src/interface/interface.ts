@@ -1,12 +1,25 @@
-export type RegisterKeyType = 'userId' | 'password1' | 'password2' | 'name' | 'birthday';
+export type RegisterKeyType = 'email' | 'password1' | 'password2' | 'username' | 'nickname';
 
 export interface RegisterInputType {
-  userId: string;
+  email: string;
   password1: string;
   password2: string;
-  name: string;
-  birthday: string;
+  username: string;
+  nickname: string;
 }
+
+export interface RegisterPostType {
+  email: string;
+  password: string;
+  username: string;
+  nickname: string;
+}
+
+export interface LoginPostType {
+  email: string;
+  password: string;
+}
+
 interface image {
   image: string;
 }
