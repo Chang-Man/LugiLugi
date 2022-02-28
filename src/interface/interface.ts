@@ -28,3 +28,11 @@ export interface ProfileInputType {
   intro: string;
   group: string;
 }
+
+export interface UserGetType {
+  id: string;
+  email: string;
+  username: string;
+  nickname: string;
+  code: string;
+}
