@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../styles/Main.module.scss';
 import Logo from '../../public/tkdmark.jpg';
 import createGame from '../../public/createGame.png';
@@ -9,13 +9,18 @@ import { BsPerson, BsThreeDotsVertical } from 'react-icons/bs';
 import authAPI from '../../API/authAPI';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/auth';
+import userAPI from '../../API/userAPI';
 const Main = () => {
+  const [user, setUser] = useState({ id: '', username: '', email: '', nickname: '', code: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onClickLogout = () => {
     authAPI.logout();
     dispatch(logout());
   };
+  useEffect(() => {
+    userAPI.getUser().then(res => setUser(res));
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -33,12 +38,12 @@ const Main = () => {
         <div className={styles.userTxt}>
           <span className={styles.userLabel}>이름</span>
           <br />
-          <span className={styles.user}>김창아</span>
+          <span className={styles.user}>{user.username}</span>
           <br />
           <br />
           <span className={styles.userLabel}>선수코드</span>
           <br />
-          <span className={styles.code}>ABCD</span>
+          <span className={styles.code}>{user.code}</span>
         </div>
       </div>
       <div className={styles.menus}>
