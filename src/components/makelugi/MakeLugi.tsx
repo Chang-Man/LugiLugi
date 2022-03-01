@@ -1,15 +1,4 @@
-import React, { useState } from 'react';
-
-type OptionType = {
-  value: string;
-  label: string;
-};
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
+import React from 'react';
 
 const MakeLugi = () => {
   return (

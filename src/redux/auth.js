@@ -1,6 +1,3 @@
-import authAPI from '../API/authAPI';
-import { AnyAction } from 'redux';
-
 //액션 타입
 const REGISTER_SUCCESS = 'auth/REGISTER_SUCCESS';
 const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';

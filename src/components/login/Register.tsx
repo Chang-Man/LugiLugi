@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { RegisterInputType, RegisterKeyType } from '../../interface/interface';
 import styles from '../../styles/Register.module.scss';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import authAPI from '../../API/authAPI';
-import { useDispatch } from 'react-redux';
-import { login, register } from '../../redux/auth';
 
 const Register = () => {
   const [registerInput, setRegisterInput] = useState<RegisterInputType>({
@@ -16,7 +14,6 @@ const Register = () => {
     nickname: '',
   });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const changeRegisterInput = (key: RegisterKeyType, input: string) => {
     setRegisterInput({ ...registerInput, [key]: input });
@@ -45,11 +42,11 @@ const Register = () => {
         nickname: registerInput.nickname,
       };
       authAPI.register(postInput).then(
-        token => {
+        () => {
           alert('가입완료');
           navigate('/');
         },
-        error => {
+        () => {
           alert('에러');
         },
       );
