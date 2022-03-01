@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Select from 'react-select';
+
 type OptionType = {
   value: string;
   label: string;
@@ -14,7 +14,6 @@ const options = [
 const MakeLugi = () => {
   return (
     <div>
-      <Select options={options} />
       <button>하이</button>
       <input />
       <input />
