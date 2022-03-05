@@ -11,9 +11,6 @@ import Profile from './components/profile/Profile';
 import Main from './components/main/Main';
 import MakeLugi from './components/makelugi/MakeLugi';
 import JoinLugi from './components/JoinLugi';
-import ScoreBoard from './components/ScoreBoard';
-import Subref from './components/Subref';
-import userAPI from './API/userAPI';
 
 const Desktop = ({ children }: any) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -35,7 +32,9 @@ function App() {
   const auth = useSelector((state: RootState) => state.auth).isLoggedIn;
   return (
     <div className='App'>
-      <Desktop></Desktop>
+      <Desktop>
+        <div className={styles.container}>모바일 버전을 확인해주세요!</div>
+      </Desktop>
       <Mobile>
         <div className={styles.container}>
           {auth ? (

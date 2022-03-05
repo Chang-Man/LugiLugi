@@ -3,7 +3,6 @@ import styles from '../../styles/Login.module.scss';
 import Logo from '../../public/tkdmark.jpg';
 import { useNavigate } from 'react-router-dom';
 import authAPI from '../../API/authAPI';
-import { LoginPostType } from '../../interface/interface';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/auth';
 
@@ -17,7 +16,7 @@ const Login = () => {
         dispatch(login(token));
       },
       error => {
-        alert('로그인 정보를 다시 입력하세요');
+        alert(error);
       },
     );
   };
