@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/ScoreBoard.module.scss';
+import Countdown from 'react-countdown';
+
 const ScoreBoard = () => {
   return (
     <div className={styles.container}>
@@ -8,6 +10,7 @@ const ScoreBoard = () => {
         <div className={styles.score}>1</div>
         <div className={styles.name}>김창아</div>
       </div>
+      <Countdown className={styles.timer} date={Date.now() + 10000} />
       <div className={styles.timer}>1:30</div>
       <div className={styles.roundTxt}>ROUND 1</div>
       <div className={`${styles.scoreContainer} ${styles.red} `}>

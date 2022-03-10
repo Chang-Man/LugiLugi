@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { LoginPostType, RegisterPostType } from '../interface/interface';
-const API_URL = 'http://3.36.71.201:8080/api/v1/user';
+const API_URL = 'https://lugiserver.com/api/v1/user';
 
 class AuthService {
   register = async (input: RegisterPostType) => {
