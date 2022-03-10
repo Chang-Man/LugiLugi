@@ -19,7 +19,12 @@ const Main = () => {
     dispatch(logout());
   };
   useEffect(() => {
-    userAPI.getUser().then(res => setUser(res));
+    userAPI.getUser().then(
+      res => setUser(res),
+      error => {
+        authAPI.logout();
+      },
+    );
   }, []);
   return (
     <div className={styles.container}>
@@ -48,7 +53,13 @@ const Main = () => {
       </div>
       <div className={styles.menus}>
         <img src={gameLog} alt={'gameLog'} />
-        <img src={createGame} alt={'createGame'} />
+        <img
+          src={createGame}
+          alt={'createGame'}
+          onClick={() => {
+            navigate('/scoreboard');
+          }}
+        />
         <img src={joinGame} alt={'joinGame'} />
       </div>
     </div>
