@@ -1,8 +1,8 @@
-import styles from '../../styles/Profile.module.scss';
+import styles from './Profile.module.scss';
 import React, { useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import GroupAddModal from './GroupAddModal';
+import GroupAddModal from './groupAddModal/GroupAddModal';
 
 const Profile = () => {
   const navigate = useNavigate();

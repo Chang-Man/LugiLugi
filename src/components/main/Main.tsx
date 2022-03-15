@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../../styles/Main.module.scss';
+import styles from './Main.module.scss';
 import Logo from '../../public/tkdmark.jpg';
 import createGame from '../../public/createGame.png';
 import joinGame from '../../public/joinGame.png';

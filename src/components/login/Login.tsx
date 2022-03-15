@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../../styles/Login.module.scss';
+import styles from './Login.module.scss';
 import Logo from '../../public/tkdmark.jpg';
 import { useNavigate } from 'react-router-dom';
 import authAPI from '../../API/authAPI';

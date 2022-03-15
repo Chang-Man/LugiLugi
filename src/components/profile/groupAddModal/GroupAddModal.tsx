@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../styles/GroupAddModal.module.scss';
+import styles from './GroupAddModal.module.scss';
 import { GrClose } from 'react-icons/gr';
 
 type ModalProps = {
