@@ -1,5 +1,4 @@
-name: Deploy
-
+name: DEPLOY
 on:
   push:
     branches: [master]
