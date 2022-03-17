@@ -4,7 +4,7 @@ import Logo from '../../public/tkdmark.jpg';
 import { useNavigate } from 'react-router-dom';
 import authAPI from '../../API/authAPI';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/auth';
+import { login } from '../../redux/module/auth';
 
 const Login = () => {
   const [loginInput, setLoginInput] = useState({ email: '', password: '' });

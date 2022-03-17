@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { BsPerson, BsThreeDotsVertical } from 'react-icons/bs';
 import authAPI from '../../API/authAPI';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/auth';
+import { logout } from '../../redux/module/auth';
 import userAPI from '../../API/userAPI';
 const Main = () => {
   const [user, setUser] = useState({ id: '', username: '', email: '', nickname: '', code: '' });
@@ -57,7 +57,7 @@ const Main = () => {
           src={createGame}
           alt={'createGame'}
           onClick={() => {
-            navigate('/scoreboard');
+            navigate('/makelugi');
           }}
         />
         <img src={joinGame} alt={'joinGame'} />
