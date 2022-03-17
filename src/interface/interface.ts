@@ -36,3 +36,12 @@ export interface UserGetType {
   nickname: string;
   code: string;
 }
+
+export interface MatchType {
+  redCode: string;
+  blueCode: string;
+  judgeCount: number;
+  roundCount: number;
+  roundTime: number;
+  breakTime: number;
+}

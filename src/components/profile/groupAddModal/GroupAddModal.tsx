@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../../styles/GroupAddModal.module.scss';
-import { GrClose } from 'react-icons/gr';
+import styles from './GroupAddModal.module.scss';
+import { FaWindowClose } from 'react-icons/fa';
 
 type ModalProps = {
   isModal: boolean;
@@ -12,7 +12,7 @@ const GroupAddModal: React.FC<ModalProps> = ({ isModal, setIsModal }) => {
     <div className={isModal ? styles.modalWrapper : styles.modalWrapperClosed}>
       <div className={isModal ? styles.plusModal : styles.plusModalClosed}>
         <div className={styles.navigationBar}>
-          <GrClose className={styles.close} size='1.5em' onClick={() => setIsModal(false)} />새 그룹 등록
+          <FaWindowClose className={styles.close} size='1em' onClick={() => setIsModal(false)} />새 그룹 등록
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@import '../../../styles/mixins.scss';
 .modalWrapper {
   position: fixed;
   top: 0;
@@ -34,7 +34,8 @@
       font-size: 150%;
       color: white;
       .close {
-        margin-right: 20%;
+        margin-left: 10px;
+        margin-right: 5%;
       }
     }
   }

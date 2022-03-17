@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { RegisterInputType, RegisterKeyType } from '../../interface/interface';
-import styles from '../../styles/Register.module.scss';
+import { RegisterInputType, RegisterKeyType } from '../../../interface/interface';
+import styles from './Register.module.scss';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import authAPI from '../../API/authAPI';
+import authAPI from '../../../API/authAPI';
 
 const Register = () => {
   const [registerInput, setRegisterInput] = useState<RegisterInputType>({

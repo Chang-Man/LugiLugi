@@ -6,12 +6,12 @@ import rootReducer from './redux';
 import styles from './styles/mobile.module.scss';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/login/Login';
-import Register from './components/login/Register';
+import Register from './components/login/register/Register';
 import Profile from './components/profile/Profile';
 import Main from './components/main/Main';
 import MakeLugi from './components/makelugi/MakeLugi';
 import JoinLugi from './components/JoinLugi';
-import ScoreBoard from './components/ScoreBoard';
+import ScoreBoard from './components/ScoreBoard/ScoreBoard';
 
 const Desktop = ({ children }: any) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });

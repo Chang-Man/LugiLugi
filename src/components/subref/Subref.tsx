@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/Subref.module.scss';
+import styles from './Subref.module.scss';
 const Subref = () => {
   return (
     <div className={styles.container}>
