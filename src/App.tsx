@@ -10,7 +10,7 @@ import Register from './components/login/register/Register';
 import Profile from './components/profile/Profile';
 import Main from './components/main/Main';
 import MakeLugi from './components/makelugi/MakeLugi';
-import JoinLugi from './components/JoinLugi';
+import JoinLugi from './components/joinLugi/JoinLugi';
 import ScoreBoard from './components/ScoreBoard/ScoreBoard';
 
 const Desktop = ({ children }: any) => {

@@ -11,6 +11,15 @@ class matchService {
       return Promise.reject(e);
     }
   };
+
+  getMatch = async (matchId: number) => {
+    try {
+      const response = await axios.get(API_URL + `/match/${matchId}/`, { headers: authHeader() });
+      return response.data;
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
 }
 
 export default new matchService();

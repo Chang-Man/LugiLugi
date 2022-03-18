@@ -49,6 +49,13 @@
     background-color: yellow;
     position: absolute;
     color: black;
+    width: fit-content;
+    transform: rotate(90deg);
+    left: 30%;
+  }
+  .block {
+    width: fit-content;
+    height: 10%;
     transform: rotate(90deg);
     left: 50%;
   }
@@ -56,7 +63,8 @@
     display: inline-block;
     width: fit-content;
     height: fit-content;
-
+    position: fixed;
+    left: -20%;
     color: white;
     font-weight: bold;
     font-size: 7vh;
@@ -70,13 +78,5 @@
     width: 90vw;
     height: 30vh;
     background-color: red;
-  }
-  .invite {
-    position: fixed;
-    font-size: 30px;
-    height: auto;
-    width: fit-content;
-    display: inline-block;
-    transform: rotate(90deg);
   }
 }

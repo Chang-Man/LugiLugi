@@ -60,7 +60,13 @@ const Main = () => {
             navigate('/makelugi');
           }}
         />
-        <img src={joinGame} alt={'joinGame'} />
+        <img
+          src={joinGame}
+          alt={'joinGame'}
+          onClick={() => {
+            navigate('/joinlugi');
+          }}
+        />
       </div>
     </div>
   );
