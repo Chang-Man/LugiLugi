@@ -39,8 +39,8 @@ const ScoreBoard = () => {
         <div className={styles.name}>{matchOption.blueName}</div>
       </div>
       <div className={styles.block} />
+      {matchOption.roundTime !== 0 && <Timer roundTime={matchOption.roundTime} />}
 
-      <Timer roundTime={matchOption.roundTime} />
       <div className={styles.roundTxt}>ROUND 1</div>
       <div className={`${styles.scoreContainer} ${styles.red} `}>
         <div className={styles.score}>0</div>
