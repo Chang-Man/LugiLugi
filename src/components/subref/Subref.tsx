@@ -1,6 +1,15 @@
-import React from 'react';
+import { Stomp } from '@stomp/stompjs';
+import React, { useEffect } from 'react';
+import SockJS from 'sockjs-client';
 import styles from './Subref.module.scss';
 const Subref = () => {
+  const sock = new SockJS('/ws/match');
+  const client = Stomp.over(sock);
+  useEffect(() => {
+    client.connect({}, () => {
+      console.log('Connected ');
+    });
+  }, [client]);
   return (
     <div className={styles.container}>
       <button className={`${styles.warning} ${styles.one}`}>경고</button>
