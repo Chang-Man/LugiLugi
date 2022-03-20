@@ -5,6 +5,7 @@ import InviteModal from './inviteModal/InviteModal';
 import { useSelector } from 'react-redux';
 import rootReducer from '../../redux';
 import matchAPI from '../../API/matchAPI';
+import SockJs from 'sockjs-client';
 
 type RootState = ReturnType<typeof rootReducer>;
 
