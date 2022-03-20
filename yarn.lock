@@ -2409,6 +2409,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stomp/stompjs@npm:^6.1.2":
+  version: 6.1.2
+  resolution: "@stomp/stompjs@npm:6.1.2"
+  checksum: f6ef589c0a39f7ab19dad8eda2a9a31f24cd585d56ed6018f9c8578883aff11e87f9d8388c11ca6187ddafb257f42822209c0ef403ee574591fc9f9059df4bc0
+  languageName: node
+  linkType: hard
+
 "@surma/rollup-plugin-off-main-thread@npm:^2.2.3":
   version: 2.2.3
   resolution: "@surma/rollup-plugin-off-main-thread@npm:2.2.3"
@@ -3091,6 +3098,15 @@ __metadata:
   version: 2.0.1
   resolution: "@types/stack-utils@npm:2.0.1"
   checksum: 205fdbe3326b7046d7eaf5e494d8084f2659086a266f3f9cf00bccc549c8e36e407f88168ad4383c8b07099957ad669f75f2532ed4bc70be2b037330f7bae019
+  languageName: node
+  linkType: hard
+
+"@types/stompjs@npm:^2.3.5":
+  version: 2.3.5
+  resolution: "@types/stompjs@npm:2.3.5"
+  dependencies:
+    "@types/node": "*"
+  checksum: 46656e4fd52593fbacca35647280163eb04c48d53a296cb1eb8297d8137667fe53c555009c7b6743c2a82935d14c9bb76c69505966e0bc30a32f14dabaff2c68
   languageName: node
   linkType: hard
 
@@ -9170,6 +9186,7 @@ __metadata:
     "@emotion/styled": ^11.8.1
     "@mui/material": ^5.5.1
     "@react-icons/all-files": ^4.1.0
+    "@stomp/stompjs": ^6.1.2
     "@testing-library/jest-dom": ^5.16.2
     "@testing-library/react": ^12.1.3
     "@testing-library/user-event": ^13.5.0
@@ -9182,6 +9199,7 @@ __metadata:
     "@types/react-dom": ^17.0.11
     "@types/sass": ^1.43.1
     "@types/sockjs-client": ^1.5.1
+    "@types/stompjs": ^2.3.5
     "@typescript-eslint/eslint-plugin": ^5.12.0
     axios: ^0.26.0
     eslint-config-prettier: ^8.3.0

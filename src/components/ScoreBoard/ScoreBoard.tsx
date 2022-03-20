@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import rootReducer from '../../redux';
 import matchAPI from '../../API/matchAPI';
 import SockJs from 'sockjs-client';
+import StompJs from '@stomp/stompjs';
 
 type RootState = ReturnType<typeof rootReducer>;
 
