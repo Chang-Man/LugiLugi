@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ScoreBoard.module.scss';
-import Timer from '../ScoreBoard/timer/Timer';
+import Timer from './timer/Timer';
 import InviteModal from './inviteModal/InviteModal';
-import { useSelector } from 'react-redux';
 import rootReducer from '../../redux';
 import matchAPI from '../../API/matchAPI';
 import SockJs from 'sockjs-client';
 import StompJs from '@stomp/stompjs';
+import { FaArrowLeft } from 'react-icons/fa';
+import { useNavigate, useParams } from 'react-router-dom';
 
 type RootState = ReturnType<typeof rootReducer>;
 
@@ -22,19 +23,21 @@ const ScoreBoard = () => {
     roundTime: 0,
     breakTime: 0,
   });
-  const match = useSelector((state: RootState) => state.match);
+
+  const navigate = useNavigate();
+  const { lugiid } = useParams();
 
   useEffect(() => {
-    if (match.id)
-      matchAPI.getMatch(match.id).then(res => {
-        setMatchOption(res);
-        console.log(res);
-      });
+    matchAPI.getMatch(lugiid).then(res => {
+      setMatchOption(res);
+      console.log(res);
+    });
   }, []);
 
   return (
     <div className={styles.container}>
-      <InviteModal isModal={isModal} setIsModal={setIsModal} match={match} />
+      <FaArrowLeft className={styles.arrow} onClick={() => navigate('/')} />
+      <InviteModal isModal={isModal} setIsModal={setIsModal} match={matchOption} />
       <Warning />
       <div className={`${styles.scoreContainer} ${styles.blue} `}>
         <div className={styles.score}>0</div>
@@ -42,7 +45,6 @@ const ScoreBoard = () => {
       </div>
       <div className={styles.block} />
       {matchOption.roundTime !== 0 && <Timer roundTime={matchOption.roundTime} />}
-
       <div className={styles.roundTxt}>ROUND 1</div>
       <div className={`${styles.scoreContainer} ${styles.red} `}>
         <div className={styles.score}>0</div>

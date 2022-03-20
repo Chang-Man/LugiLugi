@@ -4,6 +4,8 @@ import styles from './Register.module.scss';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import authAPI from '../../../API/authAPI';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const [registerInput, setRegisterInput] = useState<RegisterInputType>({
@@ -34,32 +36,38 @@ const Register = () => {
   };
 
   const clickRegister = () => {
-    if (checkEmail(registerInput.email) && checkPassword(registerInput.password1, registerInput.password2)) {
+    if (
+      checkEmail(registerInput.email) &&
+      checkPassword(registerInput.password1, registerInput.password2) &&
+      registerInput.username &&
+      registerInput.nickname
+    ) {
       const postInput = {
         email: registerInput.email,
         password: registerInput.password1,
         username: registerInput.username,
         nickname: registerInput.nickname,
       };
+
       authAPI.register(postInput).then(
         () => {
-          alert('가입완료');
+          toast.dark('루기루기 가입 완료~');
           navigate('/');
         },
-        () => {
-          alert('에러');
+        error => {
+          toast.dark(error.response.data.detail);
         },
       );
     } else {
       if (checkEmail(registerInput.email) === false) {
-        alert('이메일을 다시 확인하세요');
+        toast.dark('이메일을 다시 확인하세요.');
         return null;
       }
       if (checkPassword(registerInput.password1, registerInput.password2) === false) {
-        alert('비밀번호를 다시 확인하세요');
+        toast.dark('비밀번호를 다시 확인하세요.');
         return null;
       }
-      if (registerInput.email === '' || registerInput.nickname === '' || registerInput.username === '') alert('모두 입력해주세요.');
+      if (registerInput.email === '' || registerInput.nickname === '' || registerInput.username === '') toast.dark('모두 입력해주세요.');
     }
   };
 

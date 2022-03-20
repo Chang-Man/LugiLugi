@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import styles from './MakeLugi.module.scss';
+import styles from './MakeLugiSetting.module.scss';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Autocomplete, InputLabel, MenuItem, Select, SelectChangeEvent, Slider, TextField } from '@mui/material';
 import matchAPI from '../../API/matchAPI';
-import { useDispatch } from 'react-redux';
+
 import { createMatch } from '../../redux/module/match';
 
-const MakeLugi = () => {
+const MakeLugiSetting = () => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     redCode: '',
@@ -17,7 +17,6 @@ const MakeLugi = () => {
     roundTime: 60,
     breakTime: 30,
   });
-  const dispatch = useDispatch();
 
   const handleRoundTime = (event: Event, newValue: number | number[]) => {
     setInputValue({ ...inputValue, roundTime: newValue as number });
@@ -30,7 +29,7 @@ const MakeLugi = () => {
   return (
     <div className={styles.container}>
       <div className={styles.navigationBar}>
-        <FaArrowLeft className={styles.arrow} onClick={() => navigate(-1)} />
+        <FaArrowLeft className={styles.arrow} onClick={() => navigate('/')} />
         경기 생성
       </div>
       <form
@@ -39,8 +38,7 @@ const MakeLugi = () => {
           e.preventDefault();
           matchAPI.createMatch(inputValue).then(
             res => {
-              dispatch(createMatch(res));
-              navigate('/scoreboard');
+              navigate(`/makelugi/${res.id}`);
             },
             error => {
               console.log(error);
@@ -115,7 +113,7 @@ const MakeLugi = () => {
   );
 };
 
-export default MakeLugi;
+export default MakeLugiSetting;
 
 const stylees = (theme: any) => ({
   textField: {

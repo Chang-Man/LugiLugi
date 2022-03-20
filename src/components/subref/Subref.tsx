@@ -1,6 +1,16 @@
-import React from 'react';
+import { Stomp } from '@stomp/stompjs';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import SockJS from 'sockjs-client';
 import styles from './Subref.module.scss';
 const Subref = () => {
+  const { lugiid } = useParams();
+  const sock = new SockJS('https://lugiserver.com/ws/match');
+  const client = Stomp.over(sock);
+  const handleClick = () => {
+    console.log('Connected' + lugiid);
+    client.send('/publish/create', {}, JSON.stringify(lugiid));
+  };
   return (
     <div className={styles.container}>
       <button className={`${styles.warning} ${styles.one}`}>경고</button>

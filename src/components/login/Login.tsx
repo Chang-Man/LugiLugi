@@ -5,18 +5,21 @@ import { useNavigate } from 'react-router-dom';
 import authAPI from '../../API/authAPI';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/module/auth';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [loginInput, setLoginInput] = useState({ email: '', password: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const onClicklogin = () => {
     authAPI.login(loginInput).then(
       token => {
         dispatch(login(token));
       },
       error => {
-        alert(error);
+        toast.dark('로그인 시도를 다시 하세요');
       },
     );
   };

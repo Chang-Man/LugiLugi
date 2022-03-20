@@ -9,11 +9,12 @@ import Login from './components/login/Login';
 import Register from './components/login/register/Register';
 import Profile from './components/profile/Profile';
 import Main from './components/main/Main';
-import MakeLugi from './components/makelugi/MakeLugi';
 import JoinLugi from './components/joinLugi/JoinLugi';
-import ScoreBoard from './components/ScoreBoard/ScoreBoard';
 import userAPI from './API/userAPI';
 import authAPI from './API/authAPI';
+import MakeLugiSetting from './components/makeLugiSetting/MakeLugiSetting';
+import ScoreBoard from './components/scoreBoard/ScoreBoard';
+import Subref from './components/subref/Subref';
 
 const Desktop = ({ children }: any) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -50,9 +51,10 @@ function App() {
             <Routes>
               <Route path='/' element={<Main />} />
               <Route path='/profile' element={<Profile />} />
-              <Route path='/makelugi' element={<MakeLugi />} />
-              <Route path='/scoreboard' element={<ScoreBoard />} />
+              <Route path='/makelugi' element={<MakeLugiSetting />} />
+              <Route path='/makelugi/:lugiid' element={<ScoreBoard />} />
               <Route path='/joinLugi' element={<JoinLugi />} />
+              <Route path='/joinLugi/:lugiid' element={<Subref />} />
             </Routes>
           ) : (
             <Routes>

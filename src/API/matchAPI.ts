@@ -12,7 +12,7 @@ class matchService {
     }
   };
 
-  getMatch = async (matchId: number) => {
+  getMatch = async (matchId: string | undefined) => {
     try {
       const response = await axios.get(API_URL + `/match/${matchId}/`, { headers: authHeader() });
       return response.data;
