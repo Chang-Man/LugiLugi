@@ -10,14 +10,13 @@ const Login = () => {
   const [loginInput, setLoginInput] = useState({ email: '', password: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const onClicklogin = () => {
     authAPI.login(loginInput).then(
       token => {
         dispatch(login(token));
       },
-      error => {
-        // alert(error);
-      },
+      error => {},
     );
   };
   const onClickRegister = () => {
