@@ -4,7 +4,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Autocomplete, InputLabel, MenuItem, Select, SelectChangeEvent, Slider, TextField } from '@mui/material';
 import matchAPI from '../../API/matchAPI';
-import { useDispatch } from 'react-redux';
+
 import { createMatch } from '../../redux/module/match';
 
 const MakeLugiSetting = () => {
@@ -17,7 +17,6 @@ const MakeLugiSetting = () => {
     roundTime: 60,
     breakTime: 30,
   });
-  const dispatch = useDispatch();
 
   const handleRoundTime = (event: Event, newValue: number | number[]) => {
     setInputValue({ ...inputValue, roundTime: newValue as number });
@@ -39,7 +38,6 @@ const MakeLugiSetting = () => {
           e.preventDefault();
           matchAPI.createMatch(inputValue).then(
             res => {
-              dispatch(createMatch(res));
               navigate(`/makelugi/${res.id}`);
             },
             error => {

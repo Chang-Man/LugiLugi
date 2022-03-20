@@ -16,7 +16,7 @@ const Login = () => {
         dispatch(login(token));
       },
       error => {
-        alert(error);
+        // alert(error);
       },
     );
   };
