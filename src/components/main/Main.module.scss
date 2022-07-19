@@ -65,10 +65,18 @@
         margin-left: 10%;
       }
     }
-
+    .count {
+      margin-bottom: 3%;
+      font-weight: bold;
+      color: white;
+      .slash {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
     .calendar {
       position: relative;
-      width: 80vw;
+      width: 100vw;
       padding-top: 83%;
       background-color: white;
     }

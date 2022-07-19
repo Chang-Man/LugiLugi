@@ -32,6 +32,27 @@ const Main = () => {
             <span className={styles.code}>user.code</span>
           </div>
         </div>
+        <style>
+          {`.react-datepicker {
+          width: 100%;
+          font-family: RussoOne;
+          font-weight: lighter;
+          font-size: 110%;
+      }
+      .react-datepicker__month-container {
+        width: 100%;
+      }
+      .react-datepicker__day--today {
+        color : violet;
+      }
+
+      `}
+        </style>
+        <div className={styles.count}>
+          <span>이번 달 운동</span>
+          <span className={styles.slash}>:</span>
+          <span>20회</span>
+        </div>
         <Datepicker selected={startDate} onChange={(date: any) => setStartDate(date)} inline />
         {/* <div className={styles.calendar}>하이</div> */}
         <div className={styles.menus}>
