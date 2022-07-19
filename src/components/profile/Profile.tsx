@@ -10,7 +10,7 @@ const Profile = () => {
   return (
     <div className={styles.container}>
       <div className={styles.navigationBar}>
-        <FaArrowLeft className={styles.arrow} onClick={() => navigate(-1)} />
+        <FaArrowLeft className={styles.arrow} onClick={() => navigate('/')} />
         Profile
       </div>
       <GroupAddModal isModal={isModal} setIsModal={setIsModal} />
