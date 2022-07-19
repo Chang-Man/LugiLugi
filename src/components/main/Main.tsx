@@ -7,10 +7,34 @@ import joinGame from '../../public/joinGame.png';
 import workOut from '../../public/workOut.png';
 import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { subDays } from 'date-fns';
 
 const Main = () => {
   const [startDate, setStartDate] = useState(new Date());
   const navigate = useNavigate();
+
+  const array = [
+    {
+      id: 1,
+      date: '07/15/2022',
+    },
+    {
+      id: 2,
+      date: '07/10/2022',
+    },
+    {
+      id: 3,
+      date: '07/09/2022',
+    },
+    {
+      id: 4,
+      date: '07/19/2022',
+    },
+  ];
+  const highlight = [];
+  for (let index = 0; index < array.length; index++) {
+    highlight.push(subDays(new Date(`${array[index].date}`), 0));
+  }
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -43,9 +67,22 @@ const Main = () => {
         width: 100%;
       }
       .react-datepicker__day--today {
-        color : violet;
+         color : 808080;
+    
       }
-
+      .react-datepicker__day--selected, .react-datepicker__day--keyboard-selected {
+        background-color : black;
+      }
+      .react-datepicker__day--highlighted {
+        background-color : gray;
+      }
+      .react-datepicker__day--selected:hover {
+        background-color : black;
+      }
+      .react-datepicker__day--outside-month {
+        color: transparent !important;
+        pointer-events: none;
+      }
       `}
         </style>
         <div className={styles.count}>
@@ -53,7 +90,14 @@ const Main = () => {
           <span className={styles.slash}>:</span>
           <span>20회</span>
         </div>
-        <Datepicker selected={startDate} onChange={(date: any) => setStartDate(date)} inline />
+        <Datepicker
+          className='form-control'
+          selected={startDate}
+          onChange={(date: any) => setStartDate(date)}
+          highlightDates={highlight}
+          isClearable={false}
+          inline
+        />
         {/* <div className={styles.calendar}>하이</div> */}
         <div className={styles.menus}>
           <img
