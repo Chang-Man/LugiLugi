@@ -12,7 +12,7 @@ const JoinLugi = () => {
   return (
     <div className={styles.container}>
       <div className={styles.navigationBar}>
-        <FaArrowLeft className={styles.arrow} onClick={() => navigate('/')} />
+        <FaArrowLeft className={styles.arrow} onClick={() => navigate('/lugilugi')} />
         경기 참여
       </div>
       <form

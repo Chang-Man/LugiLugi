@@ -3,7 +3,7 @@ import Logo from '../../public/tkdmark.jpg';
 import styles from './Main.module.scss';
 import { BsPerson, BsThreeDotsVertical } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-import joinGame from '../../public/joinGame.png';
+import lugilugi from '../../public/lugilugi.png';
 import workOut from '../../public/workOut.png';
 import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -113,10 +113,10 @@ const Main = () => {
         <div className={styles.menus}>
           <img src={workOut} alt={'workOut'} onClick={() => setIsModal(true)} />
           <img
-            src={joinGame}
-            alt={'joinGame'}
+            src={lugilugi}
+            alt={'lugilugi'}
             onClick={() => {
-              navigate('/joinlugi');
+              navigate('/lugilugi');
             }}
           />
         </div>

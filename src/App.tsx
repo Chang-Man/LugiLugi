@@ -15,6 +15,7 @@ import authAPI from './API/authAPI';
 import MakeLugiSetting from './components/makeLugiSetting/MakeLugiSetting';
 import ScoreBoard from './components/scoreBoard/ScoreBoard';
 import Subref from './components/subref/Subref';
+import Lugilugi from './components/lugilugi/Lugilugi';
 
 const Desktop = ({ children }: any) => {
   const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -51,6 +52,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Main />} />
               <Route path='/profile' element={<Profile />} />
+              <Route path='/lugilugi' element={<Lugilugi />} />
               <Route path='/makelugi' element={<MakeLugiSetting />} />
               <Route path='/makelugi/:lugiid' element={<ScoreBoard />} />
               <Route path='/joinLugi' element={<JoinLugi />} />

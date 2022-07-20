@@ -1,8 +1,17 @@
+@import '../../styles/mixins.scss';
 .container {
   width: 70vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  .navigationBar {
+    @include navigationBar-default;
+    .arrow {
+      color: white;
+      position: fixed;
+      left: 5%;
+    }
+  }
   .header {
     position: fixed;
     left: 0;

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Main.module.scss';
+import styles from './Lugilugi.module.scss';
 import Logo from '../../public/tkdmark.jpg';
 import createGame from '../../public/createGame.png';
 import joinGame from '../../public/joinGame.png';
 import gameLog from '../../public/gameLog.png';
 import { useNavigate } from 'react-router-dom';
 import { BsPerson, BsThreeDotsVertical } from 'react-icons/bs';
+import { FaArrowLeft } from 'react-icons/fa';
 import authAPI from '../../API/authAPI';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/module/auth';
 import userAPI from '../../API/userAPI';
-const Main = () => {
+const Lugilugi = () => {
   const [user, setUser] = useState({ id: '', username: '', email: '', nickname: '', code: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Main = () => {
   }, []);
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      {/* <div className={styles.header}>
         <div className={styles.logos}>
           <img src={Logo} alt={'logo'} className={styles.logo} />
           <span>LUGI-LUGI</span>
@@ -37,6 +38,10 @@ const Main = () => {
           <BsPerson className={styles.profile} size={'1.5em'} onClick={() => navigate('/profile')} />
           <BsThreeDotsVertical className={styles.menu} size={'1.5em'} onClick={onClickLogout} />
         </div>
+      </div> */}
+      <div className={styles.navigationBar}>
+        <FaArrowLeft className={styles.arrow} onClick={() => navigate('/')} />
+        LUGI-LUGI
       </div>
       <div className={styles.profile}>
         <div className={styles.userImg}></div>
@@ -72,4 +77,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Lugilugi;
