@@ -15,12 +15,12 @@ const attendanceUsers = [
   { id: '0', username: '김창아', nickname: '굿', code: 'Wefkde', image: '22' },
   { id: '1', username: '김영연', nickname: '발차기', code: 'Wefkde', image: '' },
   { id: '2', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
-  { id: '2', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
-  { id: '2', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
-  { id: '2', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
-  { id: '2', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
-  { id: '2', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
-  { id: '2', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
+  { id: '3', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
+  { id: '4', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
+  { id: '5', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
+  { id: '6', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
+  { id: '7', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
+  { id: '8', username: '조은세상', nickname: '발차기', code: 'Wefkde', image: '' },
 ];
 const AttendanceModal: React.FC<ModalProps> = ({ isModal, setIsModal, date }) => {
   const formatDate = Moment(date).format('MM/DD  ');
