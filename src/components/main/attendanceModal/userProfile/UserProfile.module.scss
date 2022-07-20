@@ -1,0 +1,26 @@
+.profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: center;
+
+  .userImg {
+    display: inline-block;
+    width: 13vw;
+    height: 13vw;
+    border-radius: 10vw;
+    margin-right: 5%;
+    background-color: white;
+  }
+  .userTxt {
+    font-size: 4vw;
+    color: white;
+    width: 50%;
+    display: inline-block;
+    font-weight: bold;
+  }
+  .slash {
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+}

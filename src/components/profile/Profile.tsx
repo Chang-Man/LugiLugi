@@ -19,17 +19,7 @@ const Profile = () => {
         <input placeholder='이름' />
         <input placeholder='닉네임' />
         <input placeholder='소개' />
-        <select name='cars' id='cars'>
-          <option value='없음'>없음</option>
-          <option value='volvo'>Volvo</option>
-          <option value='saab'>Saab</option>
-          <option value='mercedes'>Mercedes</option>
-          <option value='audi'>Audi</option>
-        </select>
-        <div className={styles.noGroup} onClick={() => setIsModal(true)}>
-          속하신 그룹이 목록에 없으신가요?
-        </div>
-        <button>완료</button>
+        <button>수정 완료</button>
       </form>
     </div>
   );

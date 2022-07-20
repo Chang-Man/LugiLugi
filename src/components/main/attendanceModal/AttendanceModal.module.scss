@@ -15,14 +15,16 @@
   opacity: 1;
   visibility: visible;
   transition: 0.3s all;
+
   .plusModal {
     display: block;
-    width: 50vw;
-    height: 35vh;
+    width: 70vw;
+    height: 50vh;
     background: #646478;
     opacity: 1;
     visibility: visible;
     border-radius: 20px;
+    overflow-y: scroll;
 
     .navigationBar {
       height: 17%;
@@ -33,25 +35,10 @@
       background-color: #484855;
       font-size: 150%;
       color: white;
+      margin-bottom: 10%;
       .close {
         margin-left: 10px;
         margin-right: 5%;
-      }
-    }
-    .workOutButton {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      .cloth {
-        width: 80%;
-      }
-      .text {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        color: white;
-        font-weight: bold;
       }
     }
   }
@@ -68,4 +55,5 @@
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
+  // transition: 0.3s all;
 }

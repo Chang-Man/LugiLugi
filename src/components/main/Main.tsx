@@ -9,12 +9,14 @@ import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { subDays } from 'date-fns';
 import WorkOutModal from './workOutModal/WorkOutModal';
+import AttendanceModal from './attendanceModal/AttendanceModal';
 import Moment from 'moment';
 
 const Main = () => {
   const [nowDate, setNowDate] = useState(new Date());
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState<boolean>(false);
+  const [isAttendanceModal, setIsAttendanceModal] = useState<boolean>(false);
   const formatDate = Moment(nowDate).format('YYYY/MM');
 
   const array = [
@@ -49,13 +51,17 @@ const Main = () => {
         </div>
       </div>
       <WorkOutModal isModal={isModal} setIsModal={setIsModal} />
+      <AttendanceModal isModal={isAttendanceModal} setIsModal={setIsAttendanceModal} date={nowDate} />
       <div className={styles.mainContainer}>
         <div className={styles.profile}>
           <div className={styles.userImg}></div>
           <div className={styles.userTxt}>
             <span className={styles.user}>user.name</span>
+            <span className={styles.cuteName}></span>
             <span className={styles.slash}>/</span>
             <span className={styles.code}>user.code</span>
+            <br />
+            <span className={styles.nickName}>user.nickName</span>
           </div>
         </div>
         <style>
@@ -95,7 +101,10 @@ const Main = () => {
         <Datepicker
           className='form-control'
           selected={nowDate}
-          onChange={(date: Date) => setNowDate(date)}
+          onChange={(date: Date) => {
+            setNowDate(date);
+            setIsAttendanceModal(true);
+          }}
           highlightDates={highlight}
           isClearable={false}
           inline
