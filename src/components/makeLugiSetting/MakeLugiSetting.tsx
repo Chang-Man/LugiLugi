@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './MakeLugiSetting.module.scss';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { Autocomplete, InputLabel, MenuItem, Select, SelectChangeEvent, Slider, TextField } from '@mui/material';
+import { InputLabel, MenuItem, Select, Slider, TextField } from '@mui/material';
 import matchAPI from '../../API/matchAPI';
 
 import { createMatch } from '../../redux/module/match';

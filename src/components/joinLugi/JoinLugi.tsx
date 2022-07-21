@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './JoinLugi.module.scss';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Autocomplete, InputLabel, MenuItem, Select, SelectChangeEvent, Slider, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import Logo from '../../public/tkdmark.jpg';
 
 const JoinLugi = () => {

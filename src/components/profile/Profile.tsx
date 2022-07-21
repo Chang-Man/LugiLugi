@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import GroupAddModal from './groupAddModal/GroupAddModal';
+import defaultProfile from '../../public/defaultProfile.png';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Profile = () => {
       </div>
       <GroupAddModal isModal={isModal} setIsModal={setIsModal} />
       <form className={styles.inputs}>
-        <div className={styles.userImg} />
+        <img className={styles.userImg} src={defaultProfile} alt={'defaultProfile'} />
         <input placeholder='이름' />
         <input placeholder='닉네임' />
         <input placeholder='소개' />

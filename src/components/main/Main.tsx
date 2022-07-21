@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../../public/tkdmark.jpg';
 import styles from './Main.module.scss';
 import { BsPerson, BsThreeDotsVertical } from 'react-icons/bs';
@@ -11,6 +11,14 @@ import { subDays } from 'date-fns';
 import WorkOutModal from './workOutModal/WorkOutModal';
 import AttendanceModal from './attendanceModal/AttendanceModal';
 import Moment from 'moment';
+import defaultProfile from './../../public/defaultProfile.png';
+import authAPI from '../../API/authAPI';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/module/auth';
+import userAPI from '../../API/userAPI';
+import { setUser } from '../../redux/module/user';
+import rootReducer from '../../redux';
+type RootState = ReturnType<typeof rootReducer>;
 
 const Main = () => {
   const [nowDate, setNowDate] = useState(new Date());
@@ -18,6 +26,12 @@ const Main = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isAttendanceModal, setIsAttendanceModal] = useState<boolean>(false);
   const formatDate = Moment(nowDate).format('YYYY/MM');
+  const dispatch = useDispatch();
+  const user_info = useSelector((state: RootState) => state.user).user_info;
+  const onClickLogout = () => {
+    authAPI.logout();
+    dispatch(logout());
+  };
 
   const array = [
     {
@@ -38,6 +52,14 @@ const Main = () => {
     highlight.push(subDays(new Date(`${array[index].date}`), 0));
   }
 
+  useEffect(() => {
+    userAPI.getUser().then(
+      res => dispatch(setUser(res)),
+      error => {
+        authAPI.logout();
+      },
+    );
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -47,22 +69,27 @@ const Main = () => {
         </div>
         <div className={styles.status}>
           <BsPerson className={styles.profile} size={'1.5em'} onClick={() => navigate('/profile')} />
-          <BsThreeDotsVertical className={styles.menu} size={'1.5em'} />
+          <BsThreeDotsVertical className={styles.menu} size={'1.5em'} onClick={onClickLogout} />
         </div>
       </div>
       <WorkOutModal isModal={isModal} setIsModal={setIsModal} />
       <AttendanceModal isModal={isAttendanceModal} setIsModal={setIsAttendanceModal} date={nowDate} />
       <div className={styles.mainContainer}>
         <div className={styles.profile}>
-          <div className={styles.userImg}></div>
-          <div className={styles.userTxt}>
-            <span className={styles.user}>user.name</span>
-            <span className={styles.cuteName}></span>
-            <span className={styles.slash}>/</span>
-            <span className={styles.code}>user.code</span>
-            <br />
-            <span className={styles.nickName}>user.nickName</span>
-          </div>
+          <img className={styles.userImg} src={defaultProfile} />
+
+          {user_info == null ? (
+            <></>
+          ) : (
+            <div className={styles.userTxt}>
+              <span className={styles.user}>{user_info.username}</span>
+              <span className={styles.cuteName}></span>
+              <span className={styles.slash}>/</span>
+              <span className={styles.code}>{user_info.code}</span>
+              <br />
+              <span className={styles.nickName}>{user_info.nickname}</span>
+            </div>
+          )}
         </div>
         <style>
           {`.react-datepicker {
@@ -109,7 +136,7 @@ const Main = () => {
           isClearable={false}
           inline
         />
-        {/* <div className={styles.calendar}>하이</div> */}
+
         <div className={styles.menus}>
           <img src={workOut} alt={'workOut'} onClick={() => setIsModal(true)} />
           <img

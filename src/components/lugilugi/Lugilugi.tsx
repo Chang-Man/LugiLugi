@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Lugilugi.module.scss';
-import Logo from '../../public/tkdmark.jpg';
 import createGame from '../../public/createGame.png';
 import joinGame from '../../public/joinGame.png';
 import gameLog from '../../public/gameLog.png';
 import { useNavigate } from 'react-router-dom';
-import { BsPerson, BsThreeDotsVertical } from 'react-icons/bs';
 import { FaArrowLeft } from 'react-icons/fa';
 import authAPI from '../../API/authAPI';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/module/auth';
-import userAPI from '../../API/userAPI';
+
 const Lugilugi = () => {
   const [user, setUser] = useState({ id: '', username: '', email: '', nickname: '', code: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onClickLogout = () => {
-    authAPI.logout();
-    dispatch(logout());
-  };
-  useEffect(() => {
-    userAPI.getUser().then(
-      res => setUser(res),
-      error => {
-        authAPI.logout();
-      },
-    );
-  }, []);
+
   return (
     <div className={styles.container}>
       {/* <div className={styles.header}>

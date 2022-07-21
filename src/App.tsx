@@ -10,8 +10,6 @@ import Register from './components/login/register/Register';
 import Profile from './components/profile/Profile';
 import Main from './components/main/Main';
 import JoinLugi from './components/joinLugi/JoinLugi';
-import userAPI from './API/userAPI';
-import authAPI from './API/authAPI';
 import MakeLugiSetting from './components/makeLugiSetting/MakeLugiSetting';
 import ScoreBoard from './components/scoreBoard/ScoreBoard';
 import Subref from './components/subref/Subref';
@@ -29,16 +27,10 @@ type RootState = ReturnType<typeof rootReducer>;
 
 function App() {
   let vh = 0;
+
   useEffect(() => {
     vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-    userAPI.getUser().then(
-      res => console.log(res),
-      error => {
-        authAPI.logout();
-      },
-    );
   }, []);
   const auth = useSelector((state: RootState) => state.auth).isLoggedIn;
   return (
