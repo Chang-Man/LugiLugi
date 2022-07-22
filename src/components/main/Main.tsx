@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Logo from '../../public/tkdmark.jpg';
 import styles from './Main.module.scss';
-import { BsPerson, BsThreeDotsVertical } from 'react-icons/bs';
+import { BsPerson } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import lugilugi from '../../public/lugilugi.png';
 import workOut from '../../public/workOut.png';
@@ -18,6 +18,7 @@ import { logout } from '../../redux/module/auth';
 import userAPI from '../../API/userAPI';
 import { setUser } from '../../redux/module/user';
 import rootReducer from '../../redux';
+import { FiLogOut } from 'react-icons/fi';
 type RootState = ReturnType<typeof rootReducer>;
 
 const Main = () => {
@@ -25,9 +26,12 @@ const Main = () => {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isAttendanceModal, setIsAttendanceModal] = useState<boolean>(false);
+  const [attendanceDate, setAttendanceDate] = useState([]);
   const formatDate = Moment(nowDate).format('YYYY/MM');
   const dispatch = useDispatch();
   const user_info = useSelector((state: RootState) => state.user).user_info;
+  const highlight: Date[] = [];
+
   const onClickLogout = () => {
     authAPI.logout();
     dispatch(logout());
@@ -36,21 +40,25 @@ const Main = () => {
   const array = [
     {
       id: 1,
-      date: '07/15/2022',
+      date: '07/7/2022',
     },
     {
       id: 2,
-      date: '07/10/2022',
+      date: '07/14/2022',
     },
     {
       id: 3,
-      date: '07/09/2022',
+      date: '07/21/2022',
     },
   ];
-  const highlight = [];
-  for (let index = 0; index < array.length; index++) {
-    highlight.push(subDays(new Date(`${array[index].date}`), 0));
-  }
+
+  const handleMonthChange = (date: Date) => {
+    for (let index = 0; index < array.length; index++) {
+      highlight.push(subDays(new Date(`${array[index].date}`), 0));
+    }
+    console.log(highlight);
+    // console.log('onMonthChange', date);
+  };
 
   useEffect(() => {
     userAPI.getUser().then(
@@ -69,7 +77,7 @@ const Main = () => {
         </div>
         <div className={styles.status}>
           <BsPerson className={styles.profile} size={'1.5em'} onClick={() => navigate('/profile')} />
-          <BsThreeDotsVertical className={styles.menu} size={'1.5em'} onClick={onClickLogout} />
+          <FiLogOut className={styles.menu} size={'1.5em'} onClick={onClickLogout} />
         </div>
       </div>
       <WorkOutModal isModal={isModal} setIsModal={setIsModal} />
@@ -132,8 +140,9 @@ const Main = () => {
             setNowDate(date);
             setIsAttendanceModal(true);
           }}
-          highlightDates={highlight}
+          highlightDates={attendanceDate}
           isClearable={false}
+          onMonthChange={handleMonthChange}
           inline
         />
 

@@ -5,15 +5,13 @@ import joinGame from '../../public/joinGame.png';
 import gameLog from '../../public/gameLog.png';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import authAPI from '../../API/authAPI';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/module/auth';
+import { useSelector } from 'react-redux';
+import rootReducer from '../../redux';
+type RootState = ReturnType<typeof rootReducer>;
 
 const Lugilugi = () => {
-  const [user, setUser] = useState({ id: '', username: '', email: '', nickname: '', code: '' });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
+  const user_info = useSelector((state: RootState) => state.user).user_info;
   return (
     <div className={styles.container}>
       {/* <div className={styles.header}>
@@ -32,16 +30,20 @@ const Lugilugi = () => {
       </div>
       <div className={styles.profile}>
         <div className={styles.userImg}></div>
-        <div className={styles.userTxt}>
-          <span className={styles.userLabel}>이름</span>
-          <br />
-          <span className={styles.user}>{user.username}</span>
-          <br />
-          <br />
-          <span className={styles.userLabel}>선수코드</span>
-          <br />
-          <span className={styles.code}>{user.code}</span>
-        </div>
+        {user_info == null ? (
+          <></>
+        ) : (
+          <div className={styles.userTxt}>
+            <span className={styles.userLabel}>이름</span>
+            <br />
+            <span className={styles.user}>{user_info.username}</span>
+            <br />
+            <br />
+            <span className={styles.userLabel}>선수코드</span>
+            <br />
+            <span className={styles.code}>{user_info.code}</span>
+          </div>
+        )}
       </div>
       <div className={styles.menus}>
         <img src={gameLog} alt={'gameLog'} />
