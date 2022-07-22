@@ -5,9 +5,10 @@ import InviteModal from './inviteModal/InviteModal';
 import rootReducer from '../../redux';
 import matchAPI from '../../API/matchAPI';
 import SockJs from 'sockjs-client';
-import StompJs from '@stomp/stompjs';
+import StompJs, { Stomp } from '@stomp/stompjs';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
+import SockJS from 'sockjs-client';
 
 type RootState = ReturnType<typeof rootReducer>;
 
@@ -27,11 +28,23 @@ const ScoreBoard = () => {
   const navigate = useNavigate();
   const { lugiid } = useParams();
 
+  const socket = new SockJS('https://lugiserver.com/ws');
+  const stompClient = Stomp.over(socket);
+
+  function onMessageReceived(payload: any) {
+    const message = JSON.parse(payload.body);
+    console.log(message);
+  }
+
   useEffect(() => {
     matchAPI.getMatch(lugiid).then(res => {
       setMatchOption(res);
-      console.log(res);
+      stompClient.connect({}, () => {
+        stompClient.subscribe(`/subscribe/${matchOption.inviteCode}`, onMessageReceived);
+      });
     });
+
+    return () => stompClient.disconnect();
   }, []);
 
   return (
@@ -47,7 +60,7 @@ const ScoreBoard = () => {
       {matchOption.roundTime !== 0 && <Timer roundTime={matchOption.roundTime} />}
       <div className={styles.roundTxt}>ROUND 1</div>
       <div className={`${styles.scoreContainer} ${styles.red} `}>
-        <div className={styles.score}>0</div>
+        <div className={styles.score}>1</div>
         <div className={styles.name}>{matchOption.redName}</div>
       </div>
       <Warning />

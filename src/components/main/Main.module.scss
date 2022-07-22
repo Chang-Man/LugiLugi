@@ -1,14 +1,14 @@
 .container {
-  width: 70vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 100vw;
+  padding: 10%;
+  padding-top: 30%;
+  display: inline-block;
   .header {
     position: fixed;
     left: 0;
     top: 0;
     box-sizing: border-box;
-    padding: 30px;
+    padding: 7%;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -18,7 +18,7 @@
       width: fit-content;
       font-family: RussoOne;
       color: white;
-      font-size: 5vw;
+      font-size: 7vw;
       .logo {
         width: 10%;
         margin-right: 5%;
@@ -36,40 +36,64 @@
       }
     }
   }
-  .profile {
-    margin-top: 10%;
+
+  .mainContainer {
     display: flex;
-    align-items: center;
-    .userImg {
-      display: inline-block;
-      width: 40vw;
-      height: 40vw;
-      border-radius: 40vw;
-      margin-right: 15%;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    .profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      .userImg {
+        display: inline-block;
+        width: 13vw;
+        height: 13vw;
+        border-radius: 10vw;
+        margin-right: 15%;
+        // background-color: white;
+      }
+      .userTxt {
+        display: inline-block;
+        width: 100%;
+        font-size: 4vw;
+        color: white;
+        display: inline-block;
+        font-weight: bold;
+      }
+      .slash {
+        margin-right: 5%;
+        margin-left: 5%;
+      }
+    }
+    .count {
+      margin-bottom: 3%;
+      font-weight: bold;
+      color: white;
+      .slash {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+    .calendar {
+      position: relative;
+      width: 100vw;
+      padding-top: 83%;
       background-color: white;
     }
-    .userTxt {
-      font-size: 4vw;
-      color: white;
-      display: inline-block;
-      .userLabel {
-        font-weight: bold;
-        color: rgba(255, 255, 255, 0.5);
+
+    .menus {
+      width: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      img {
+        width: 75%;
+        margin-bottom: 5%;
       }
-      .user {
-        margin-left: 20%;
-      }
-      .code {
-        margin-left: 20%;
-      }
-    }
-  }
-  .menus {
-    width: auto;
-    margin-top: 10%;
-    img {
-      width: 100%;
-      margin-bottom: 5%;
     }
   }
 }

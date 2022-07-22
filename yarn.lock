@@ -2905,6 +2905,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/moment@npm:^2.13.0":
+  version: 2.13.0
+  resolution: "@types/moment@npm:2.13.0"
+  dependencies:
+    moment: "*"
+  checksum: 0bb9e73c0c961a1112ba67773779c3a84edca5063660e79f8b104bc0857dc53447f93e7ac3df78924d17e7e0a87c9ccc9e87505308798c9495ac6de278af7305
+  languageName: node
+  linkType: hard
+
 "@types/node-sass@npm:^4.11.2":
   version: 4.11.2
   resolution: "@types/node-sass@npm:4.11.2"
@@ -4684,6 +4693,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"classnames@npm:^2.2.6":
+  version: 2.3.1
+  resolution: "classnames@npm:2.3.1"
+  checksum: 14db8889d56c267a591f08b0834989fe542d47fac659af5a539e110cc4266694e8de86e4e3bbd271157dbd831361310a8293e0167141e80b0f03a0f175c80960
+  languageName: node
+  linkType: hard
+
 "clean-css@npm:^5.2.2":
   version: 5.2.4
   resolution: "clean-css@npm:5.2.4"
@@ -5361,6 +5377,13 @@ __metadata:
     whatwg-mimetype: ^2.3.0
     whatwg-url: ^8.0.0
   checksum: 97caf828aac25e25e04ba6869db0f99c75e6859bb5b424ada28d3e7841941ebf08ddff3c1b1bb4585986bd507a5d54c2a716853ea6cb98af877400e637393e71
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^2.24.0":
+  version: 2.28.0
+  resolution: "date-fns@npm:2.28.0"
+  checksum: a0516b2e4f99b8bffc6cc5193349f185f195398385bdcaf07f17c2c4a24473c99d933eb0018be4142a86a6d46cb0b06be6440ad874f15e795acbedd6fd727a1f
   languageName: node
   linkType: hard
 
@@ -9139,7 +9162,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.0.0, loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -9193,6 +9216,7 @@ __metadata:
     "@types/bootstrap": ^5.1.9
     "@types/css-modules": ^1.0.2
     "@types/jest": ^27.4.0
+    "@types/moment": ^2.13.0
     "@types/node": ^16.11.25
     "@types/node-sass": ^4.11.2
     "@types/react": ^17.0.39
@@ -9208,10 +9232,12 @@ __metadata:
     eslint-plugin-json: ^3.1.0
     eslint-plugin-prettier: ^4.0.0
     eslint-plugin-react: ^7.28.0
+    moment: ^2.29.4
     node-sass: ^7.0.1
     prettier: ^2.5.1
     prettier-eslint: ^13.0.0
     react: ^17.0.2
+    react-datepicker: ^4.8.0
     react-dom: ^17.0.2
     react-icons: ^4.3.1
     react-redux: ^7.2.6
@@ -9598,6 +9624,13 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: a96865108c6c3b1b8e1d5e9f11843de1e077e57737602de1b82030815f311be11f96f09cce59bd5b903d0b29834733e5313f9301e3ed6d6f6fba2eae0df4298f
+  languageName: node
+  linkType: hard
+
+"moment@npm:*, moment@npm:^2.29.4":
+  version: 2.29.4
+  resolution: "moment@npm:2.29.4"
+  checksum: 0ec3f9c2bcba38dc2451b1daed5daded747f17610b92427bebe1d08d48d8b7bdd8d9197500b072d14e326dd0ccf3e326b9e3d07c5895d3d49e39b6803b76e80e
   languageName: node
   linkType: hard
 
@@ -11498,6 +11531,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-datepicker@npm:^4.8.0":
+  version: 4.8.0
+  resolution: "react-datepicker@npm:4.8.0"
+  dependencies:
+    "@popperjs/core": ^2.9.2
+    classnames: ^2.2.6
+    date-fns: ^2.24.0
+    prop-types: ^15.7.2
+    react-onclickoutside: ^6.12.0
+    react-popper: ^2.2.5
+  peerDependencies:
+    react: ^16.9.0 || ^17 || ^18
+    react-dom: ^16.9.0 || ^17 || ^18
+  checksum: d31a1002c5c6220fd8a5201f3a71015ac09b003d71f59ebc6fc0f9c452268f924f0244e69c223f64763ebb2131031ce5e792872631bfb364c34b8ea730258e6c
+  languageName: node
+  linkType: hard
+
 "react-dev-utils@npm:^12.0.0":
   version: 12.0.0
   resolution: "react-dev-utils@npm:12.0.0"
@@ -11550,6 +11600,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-fast-compare@npm:^3.0.1":
+  version: 3.2.0
+  resolution: "react-fast-compare@npm:3.2.0"
+  checksum: 8ef272c825ae329f61633ce4ce7f15aa5b84e5214d88bc0823880236e03e985a13195befa2c7a4eda7db3b017dc7985729152d88445823f652403cf36c2b86aa
+  languageName: node
+  linkType: hard
+
 "react-icons@npm:^4.3.1":
   version: 4.3.1
   resolution: "react-icons@npm:4.3.1"
@@ -11570,6 +11627,30 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 9d6d111d8990dc98bc5402c1266a808b0459b5d54830bbea24c12d908b536df7883f268a7868cfaedde3dd9d4e0d574db456f84d2e6df9c4526f99bb4b5344d8
+  languageName: node
+  linkType: hard
+
+"react-onclickoutside@npm:^6.12.0":
+  version: 6.12.2
+  resolution: "react-onclickoutside@npm:6.12.2"
+  peerDependencies:
+    react: ^15.5.x || ^16.x || ^17.x || ^18.x
+    react-dom: ^15.5.x || ^16.x || ^17.x || ^18.x
+  checksum: a0c7f4fbcf84e00d50b3fc18208e5fdc4e97b17daf910f176659e079038a560d2e299955804d20e6ca2bf375404d03fdb865dc7f5f85cab3e60b493be4375e77
+  languageName: node
+  linkType: hard
+
+"react-popper@npm:^2.2.5":
+  version: 2.3.0
+  resolution: "react-popper@npm:2.3.0"
+  dependencies:
+    react-fast-compare: ^3.0.1
+    warning: ^4.0.2
+  peerDependencies:
+    "@popperjs/core": ^2.0.0
+    react: ^16.8.0 || ^17 || ^18
+    react-dom: ^16.8.0 || ^17 || ^18
+  checksum: 837111c98738011c69b3069a464ea5bdcbf487105b6148e8faf90cb7337e134edb1b98b8824322941c378756cca30a15c18c25f558e53b85ed5762fa0dc8e6b2
   languageName: node
   linkType: hard
 
@@ -13969,6 +14050,15 @@ __metadata:
   dependencies:
     makeerror: 1.0.12
   checksum: ad7a257ea1e662e57ef2e018f97b3c02a7240ad5093c392186ce0bcf1f1a60bbadd520d073b9beb921ed99f64f065efb63dfc8eec689a80e569f93c1c5d5e16c
+  languageName: node
+  linkType: hard
+
+"warning@npm:^4.0.2":
+  version: 4.0.3
+  resolution: "warning@npm:4.0.3"
+  dependencies:
+    loose-envify: ^1.0.0
+  checksum: 4f2cb6a9575e4faf71ddad9ad1ae7a00d0a75d24521c193fa464f30e6b04027bd97aa5d9546b0e13d3a150ab402eda216d59c1d0f2d6ca60124d96cd40dfa35c
   languageName: node
   linkType: hard
 

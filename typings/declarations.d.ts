@@ -6,3 +6,7 @@ declare module '*.jpg' {
 declare module '*.png' {
   export default '' as string;
 }
+
+declare module 'react-datepicker' {
+  export default any;
+}

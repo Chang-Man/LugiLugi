@@ -1,0 +1,71 @@
+@import '../../../styles/mixins.scss';
+.modalWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 1;
+  visibility: visible;
+  transition: 0.3s all;
+  .plusModal {
+    display: block;
+    width: 50vw;
+    height: 35vh;
+    background: #646478;
+    opacity: 1;
+    visibility: visible;
+    border-radius: 20px;
+
+    .navigationBar {
+      height: 17%;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      display: flex;
+      align-items: center;
+      background-color: #484855;
+      font-size: 150%;
+      color: white;
+      .close {
+        margin-left: 10px;
+        margin-right: 5%;
+      }
+    }
+    .workOutButton {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .cloth {
+        width: 80%;
+      }
+      .text {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        color: white;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.modalWrapperClosed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+}

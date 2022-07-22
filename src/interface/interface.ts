@@ -37,6 +37,14 @@ export interface UserGetType {
   code: string;
 }
 
+export interface UserGetProfileType {
+  id: string;
+  username: string;
+  nickname: string;
+  code: string;
+  image: string;
+}
+
 export interface MatchType {
   redCode: string;
   blueCode: string;
