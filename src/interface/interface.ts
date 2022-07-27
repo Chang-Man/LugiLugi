@@ -53,3 +53,12 @@ export interface MatchType {
   roundTime: number;
   breakTime: number;
 }
+
+export interface postAttendanceType {
+  date: string;
+}
+
+export interface getAttendanceMonthType {
+  year: string;
+  month: string;
+}
