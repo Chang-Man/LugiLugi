@@ -12,6 +12,7 @@ import WorkOutModal from './workOutModal/WorkOutModal';
 import AttendanceModal from './attendanceModal/AttendanceModal';
 import Moment from 'moment';
 import defaultProfile from './../../public/defaultProfile.png';
+import temp_image from './../../public/myimage.jpg';
 import authAPI from '../../API/authAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/module/auth';
@@ -19,18 +20,25 @@ import userAPI from '../../API/userAPI';
 import { setUser } from '../../redux/module/user';
 import rootReducer from '../../redux';
 import { FiLogOut } from 'react-icons/fi';
+import moment from 'moment';
+import attendance from '../../API/attendance';
 type RootState = ReturnType<typeof rootReducer>;
+
+interface attendanceDateObjectType {
+  id: string;
+  date: string;
+}
 
 const Main = () => {
   const [nowDate, setNowDate] = useState(new Date());
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isAttendanceModal, setIsAttendanceModal] = useState<boolean>(false);
-  const [attendanceDate, setAttendanceDate] = useState([]);
+  const [attendanceDate, setAttendanceDate] = useState<Date[]>([]);
+  const [dateToPost, setDateToPost] = useState<Date>();
   const formatDate = Moment(nowDate).format('YYYY/MM');
   const dispatch = useDispatch();
   const user_info = useSelector((state: RootState) => state.user).user_info;
-  const highlight: Date[] = [];
 
   const onClickLogout = () => {
     authAPI.logout();
@@ -53,11 +61,7 @@ const Main = () => {
   ];
 
   const handleMonthChange = (date: Date) => {
-    for (let index = 0; index < array.length; index++) {
-      highlight.push(subDays(new Date(`${array[index].date}`), 0));
-    }
-    console.log(highlight);
-    // console.log('onMonthChange', date);
+    setDateToPost(date);
   };
 
   useEffect(() => {
@@ -67,7 +71,26 @@ const Main = () => {
         authAPI.logout();
       },
     );
+    attendance.getAttendanceMonth({ year: moment().format('YYYY'), month: moment().format('MM') }).then(res => {
+      setAttendanceDate([]);
+      res.results.map((res: string, idx: number) => {
+        setAttendanceDate(prevArray => [...prevArray, subDays(new Date(res), 0)]);
+      });
+    });
   }, []);
+
+  useEffect(() => {
+    const yearToGet = moment(dateToPost).format('YYYY');
+    const monthToGet = moment(dateToPost).format('MM');
+
+    attendance.getAttendanceMonth({ year: yearToGet, month: monthToGet }).then(res => {
+      setAttendanceDate([]);
+      res.results.map((res: string, idx: number) => {
+        setAttendanceDate(prevArray => [...prevArray, subDays(new Date(res), 0)]);
+      });
+    });
+  }, [dateToPost, setDateToPost]);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -80,11 +103,11 @@ const Main = () => {
           <FiLogOut className={styles.menu} size={'1.5em'} onClick={onClickLogout} />
         </div>
       </div>
-      <WorkOutModal isModal={isModal} setIsModal={setIsModal} />
+      <WorkOutModal isModal={isModal} setIsModal={setIsModal} setAttendanceDate={setAttendanceDate} />
       <AttendanceModal isModal={isAttendanceModal} setIsModal={setIsAttendanceModal} date={nowDate} />
       <div className={styles.mainContainer}>
         <div className={styles.profile}>
-          <img className={styles.userImg} src={defaultProfile} />
+          <img className={styles.userImg} src={temp_image} />
 
           {user_info == null ? (
             <></>
@@ -131,7 +154,7 @@ const Main = () => {
         <div className={styles.count}>
           <span>{formatDate} 운동</span>
           <span className={styles.slash}>:</span>
-          <span>{array.length}회</span>
+          <span>{attendanceDate.length}회</span>
         </div>
         <Datepicker
           className='form-control'
