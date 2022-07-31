@@ -19,21 +19,29 @@
     align-items: center;
 
     .userImg {
-      width: 40vw;
-      height: 40vw;
+      width: 45vw;
+      height: 45vw;
       border-radius: 40vw;
       margin-bottom: 10%;
+    }
+
+    .fileUpload {
+      margin: 0;
+      margin-bottom: 30%;
+      font-size: 4vw;
+      color: rgba(255, 255, 255, 0.5);
     }
     @include input-default;
     input {
       width: 100%;
       color: rgba(255, 255, 255, 0.5);
       margin-bottom: 10%;
+      font-size: 5vw;
     }
     button {
       @include button-default;
       width: 60%;
-      font-size: 6vw;
+      font-size: 5vw;
       margin-top: 10%;
     }
     select {
