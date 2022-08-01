@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './ScoreBoard.module.scss';
 import Timer from './timer/Timer';
 import InviteModal from './inviteModal/InviteModal';
 import rootReducer from '../../redux';
 import matchAPI from '../../API/matchAPI';
 import SockJs from 'sockjs-client';
-import StompJs, { Stomp } from '@stomp/stompjs';
+import StompJs, { debugFnType, Stomp } from '@stomp/stompjs';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 import SockJS from 'sockjs-client';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { updateScore } from '../../redux/module/match';
 type RootState = ReturnType<typeof rootReducer>;
 
 const ScoreBoard = () => {
@@ -24,46 +25,85 @@ const ScoreBoard = () => {
     roundTime: 0,
     breakTime: 0,
   });
+  // const liveMatch = useRef({
+  //   redScore: 0,
+  //   blueScore: 0,
+  // });
+  const redScore = useSelector((state: RootState) => state.match).redScore;
+  const blueScore = useSelector((state: RootState) => state.match).blueScore;
+  const redPenalty = useSelector((state: RootState) => state.match).redPenalty;
+  const bluePenalty = useSelector((state: RootState) => state.match).bluePenalty;
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const { lugiid } = useParams();
-
-  const socket = new SockJS('https://lugiserver.com/ws');
-  const stompClient = Stomp.over(socket);
-
-  function onMessageReceived(payload: any) {
-    const message = JSON.parse(payload.body);
-    console.log(message);
-  }
+  const { inviteCode } = useParams();
 
   useEffect(() => {
-    matchAPI.getMatch(lugiid).then(res => {
+    dispatch(
+      updateScore({
+        redScore: 0,
+        blueScore: 0,
+        redPenalty: 0,
+        bluePenalty: 0,
+      }),
+    );
+  }, []);
+
+  useEffect(() => {
+    matchAPI.getMatch(inviteCode).then(res => {
       setMatchOption(res);
-      stompClient.connect({}, () => {
-        stompClient.subscribe(`/subscribe/${matchOption.inviteCode}`, onMessageReceived);
+    });
+    const socket = new SockJS('https://lugiserver.com/ws');
+    const stompClient = Stomp.over(socket);
+    stompClient.connect({}, () => {
+      stompClient.subscribe(`/subscribe/${inviteCode}`, data => {
+        const state = JSON.parse(data.body);
+        dispatch(
+          updateScore({
+            redScore: state.redScore,
+            blueScore: state.blueScore,
+            redPenalty: state.redPenalty,
+            bluePenalty: state.bluePenalty,
+          }),
+        );
+        console.log(state);
       });
     });
 
-    return () => stompClient.disconnect();
+    return function cleanup() {
+      stompClient.disconnect();
+    };
   }, []);
 
   return (
     <div className={styles.container}>
-      <FaArrowLeft className={styles.arrow} onClick={() => navigate('/')} />
+      <FaArrowLeft
+        className={styles.arrow}
+        onClick={() => {
+          navigate('/');
+        }}
+      />
       <InviteModal isModal={isModal} setIsModal={setIsModal} match={matchOption} />
-      <Warning />
+      <div className={styles.warningContainer}>
+        <div className={styles.warning}>{bluePenalty}</div>
+        <div className={styles.warningTxt}>경고</div>
+      </div>
       <div className={`${styles.scoreContainer} ${styles.blue} `}>
-        <div className={styles.score}>0</div>
+        <div className={styles.score}>{blueScore}</div>
         <div className={styles.name}>{matchOption.blueName}</div>
       </div>
       <div className={styles.block} />
       {matchOption.roundTime !== 0 && <Timer roundTime={matchOption.roundTime} />}
       <div className={styles.roundTxt}>ROUND 1</div>
       <div className={`${styles.scoreContainer} ${styles.red} `}>
-        <div className={styles.score}>1</div>
+        <div className={styles.score}>{redScore}</div>
         <div className={styles.name}>{matchOption.redName}</div>
       </div>
-      <Warning />
+      <div className={styles.warningContainer}>
+        <div className={styles.warning}>{redPenalty}</div>
+        <div className={styles.warningTxt}>경고</div>
+      </div>
     </div>
   );
 };

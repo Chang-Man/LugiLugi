@@ -32,7 +32,7 @@ const inViteModal: React.FC<ModalProps> = ({ isModal, setIsModal, match }) => {
           초대 코드
         </div>
         <div className={styles.wrapper}>
-          {match.id ? (
+          {match.inviteCode ? (
             <>
               <span>부심에게 알려주세요!</span>
               <span className={styles.inviteCode}>{match.inviteCode}</span>

@@ -46,7 +46,7 @@ function App() {
               <Route path='/profile' element={<Profile />} />
               <Route path='/lugilugi' element={<Lugilugi />} />
               <Route path='/makelugi' element={<MakeLugiSetting />} />
-              <Route path='/makelugi/:lugiid' element={<ScoreBoard />} />
+              <Route path='/makelugi/:inviteCode' element={<ScoreBoard />} />
               <Route path='/joinLugi' element={<JoinLugi />} />
               <Route path='/joinLugi/:lugicode' element={<Subref />} />
             </Routes>

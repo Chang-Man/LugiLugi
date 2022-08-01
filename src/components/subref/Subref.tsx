@@ -13,17 +13,14 @@ const Subref = () => {
 
   useEffect(() => {
     stompClient.connect({}, () => {
-      stompClient.send(`/join/${lugicode}`, () => {
+      stompClient.send(`/publish/${lugicode}`, () => {
         return {
           userId: String, // 심판으로 참여하고자 하는 유저의 id
-
           inviteCode: String, // 참여하고자 하는 경기의 inviteCode
-
           type: 'JUDGE',
         };
       });
     });
-
     return () => stompClient.disconnect();
   }, []);
 
@@ -38,36 +35,142 @@ const Subref = () => {
         <button
           className={`${styles.buttons}`}
           onClick={() => {
-            stompClient.send(`/publish/${lugicode}/score`, {}, JSON.stringify({ judge: 'String', player: 'BLUE', score: '1' }));
+            stompClient.send(
+              `/publish/${lugicode}/score`,
+              {},
+              JSON.stringify({
+                judge: 'string',
+                player: 'BLUE',
+                score: '1',
+              }),
+            );
           }}
         >
           1
         </button>
-        <button className={`${styles.buttons}`}>2</button>
-        <button className={`${styles.buttons}`}>3</button>
+        <button
+          className={`${styles.buttons}`}
+          onClick={() => {
+            stompClient.send(
+              `/publish/${lugicode}/score`,
+              {},
+              JSON.stringify({
+                judge: 'string',
+                player: 'BLUE',
+                score: '2',
+              }),
+            );
+          }}
+        >
+          2
+        </button>
+        <button
+          className={`${styles.buttons}`}
+          onClick={() => {
+            stompClient.send(
+              `/publish/${lugicode}/score`,
+              {},
+              JSON.stringify({
+                judge: 'string',
+                player: 'BLUE',
+                score: '3',
+              }),
+            );
+          }}
+        >
+          3
+        </button>
       </div>
       <button
         className={styles.start}
         onClick={() => {
-          // stompClient.send(
-          //   '/publish/ping',
-          //   {},
-          //   JSON.stringify({}), // 빈 ?? 거 보내려면 어케 하나용 ..
-          // );
-          stompClient.send(`/publish/${lugicode}/flow`, {}, JSON.stringify({ judge: 'judge', type: start == 0 ? 'START' : 'STOP' }));
+          stompClient.send(`/publish/${lugicode}/flow`, {}, JSON.stringify({ judge: 'judge', flowtype: 'START' }));
           setStart(1);
         }}
       >
         시작/멈춤
       </button>
       <div className={styles.minus}>
-        <button>-1</button>
-        <button>-1</button>
+        <button
+          onClick={() => {
+            stompClient.send(
+              `/publish/${lugicode}/score`,
+              {},
+              JSON.stringify({
+                judge: 'string',
+                player: 'BLUE',
+                score: '-1',
+              }),
+            );
+          }}
+        >
+          -1
+        </button>
+        <button
+          onClick={() => {
+            stompClient.send(
+              `/publish/${lugicode}/score`,
+              {},
+              JSON.stringify({
+                judge: 'string',
+                player: 'RED',
+                score: '-1',
+              }),
+            );
+          }}
+        >
+          -1
+        </button>
       </div>
       <div className={`${styles.scoreContainer} ${styles.red} `}>
-        <button className={`${styles.buttons}`}>1</button>
-        <button className={`${styles.buttons}`}>2</button>
-        <button className={`${styles.buttons}`}>3</button>
+        <button
+          className={`${styles.buttons}`}
+          onClick={() => {
+            stompClient.send(
+              `/publish/${lugicode}/score`,
+              {},
+              JSON.stringify({
+                judge: 'string',
+                player: 'RED',
+                score: '1',
+              }),
+            );
+          }}
+        >
+          1
+        </button>
+        <button
+          className={`${styles.buttons}`}
+          onClick={() => {
+            stompClient.send(
+              `/publish/${lugicode}/score`,
+              {},
+              JSON.stringify({
+                judge: 'string',
+                player: 'RED',
+                score: '2',
+              }),
+            );
+          }}
+        >
+          2
+        </button>
+        <button
+          className={`${styles.buttons}`}
+          onClick={() => {
+            stompClient.send(
+              `/publish/${lugicode}/score`,
+              {},
+              JSON.stringify({
+                judge: 'string',
+                player: 'RED',
+                score: '3',
+              }),
+            );
+          }}
+        >
+          3
+        </button>
       </div>
       <button className={`${styles.warning} ${styles.two}`}>경고</button>
     </div>

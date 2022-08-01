@@ -3,6 +3,9 @@ import React, { useRef, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import defaultProfile from '../../public/defaultProfile.png';
+import { useSelector } from 'react-redux';
+import rootReducer from '../../redux';
+type RootState = ReturnType<typeof rootReducer>;
 
 interface editProfileInput {
   username: string;
@@ -14,8 +17,10 @@ const Profile = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const [fileImage, setFileImage] = useState<File>();
-  const [imageUrl, setImageUrl] = useState<string>();
-  const [editInput, setEditInput] = useState<editProfileInput>({ username: '', nickname: '' });
+  const user_info = useSelector((state: RootState) => state.user).user_info;
+  const [editInput, setEditInput] = useState<editProfileInput>({ username: user_info.username, nickname: user_info.nickname });
+  const [imageUrl, setImageUrl] = useState<string>(user_info.image);
+
   const saveFileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files !== null) {
       setFileImage(e.target.files[0]);
@@ -29,7 +34,7 @@ const Profile = () => {
         Profile
       </div>
       <form className={styles.inputs}>
-        {!fileImage ? (
+        {!imageUrl ? (
           <img className={styles.userImg} src={defaultProfile} alt={'defaultProfile'} />
         ) : (
           <img className={styles.userImg} src={imageUrl} alt={'editedImage'} />
