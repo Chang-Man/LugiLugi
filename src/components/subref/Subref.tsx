@@ -1,36 +1,53 @@
 import { Stomp } from '@stomp/stompjs';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import SockJS from 'sockjs-client';
+import rootReducer from '../../redux';
 import styles from './Subref.module.scss';
-
+type RootState = ReturnType<typeof rootReducer>;
 const Subref = () => {
-  const [start, setStart] = useState(0);
   const { lugicode } = useParams();
+  const user_info = useSelector((state: RootState) => state.user).user_info;
 
   const socket = new SockJS('https://lugiserver.com/ws');
   const stompClient = Stomp.over(socket);
 
   useEffect(() => {
-    stompClient.connect({}, () => {
-      stompClient.send(`/publish/${lugicode}`, () => {
-        return {
-          userId: String, // 심판으로 참여하고자 하는 유저의 id
-          inviteCode: String, // 참여하고자 하는 경기의 inviteCode
-          type: 'JUDGE',
-        };
-      });
+    stompClient.connect({}, (frame: string) => {
+      console.log('Connected:' + frame);
+      setTimeout(() => {
+        stompClient.send(
+          `/${lugicode}/join`,
+          {},
+          JSON.stringify({
+            userId: user_info.id,
+            inviteCode: lugicode,
+            type: 'JUDGE',
+          }),
+        );
+      }, 500);
     });
     return () => stompClient.disconnect();
   }, []);
 
-  // stompClient.send('/publish/ping', {}, JSON.stringify(''));
-
-  // stompClient.send('/publish/ping', {}, '');
-
   return (
     <div className={styles.container}>
-      <button className={`${styles.warning} ${styles.one}`}>경고</button>
+      <button
+        className={`${styles.warning} ${styles.one}`}
+        onClick={() => {
+          stompClient.send(
+            `/publish/${lugicode}/penalty`,
+            {},
+            JSON.stringify({
+              judge: 'string',
+              player: 'BLUE',
+            }),
+          );
+        }}
+      >
+        경고
+      </button>
       <div className={`${styles.scoreContainer} ${styles.blue} `}>
         <button
           className={`${styles.buttons}`}
@@ -85,10 +102,17 @@ const Subref = () => {
         className={styles.start}
         onClick={() => {
           stompClient.send(`/publish/${lugicode}/flow`, {}, JSON.stringify({ judge: 'judge', flowtype: 'START' }));
-          setStart(1);
         }}
       >
-        시작/멈춤
+        시작
+      </button>
+      <button
+        className={styles.stop}
+        onClick={() => {
+          stompClient.send(`/publish/${lugicode}/flow`, {}, JSON.stringify({ judge: 'judge', flowtype: 'STOP' }));
+        }}
+      >
+        멈춤
       </button>
       <div className={styles.minus}>
         <button
@@ -172,7 +196,21 @@ const Subref = () => {
           3
         </button>
       </div>
-      <button className={`${styles.warning} ${styles.two}`}>경고</button>
+      <button
+        className={`${styles.warning} ${styles.two}`}
+        onClick={() => {
+          stompClient.send(
+            `/publish/${lugicode}/penalty`,
+            {},
+            JSON.stringify({
+              judge: 'string',
+              player: 'RED',
+            }),
+          );
+        }}
+      >
+        경고
+      </button>
     </div>
   );
 };

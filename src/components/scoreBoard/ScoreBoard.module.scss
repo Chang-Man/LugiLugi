@@ -53,20 +53,48 @@
   .red {
     background-color: red;
   }
-  .timer {
-    font-size: 10vh;
+  // .timer {
+  //   font-size: 10vh;
+  //   background-color: yellow;
+  //   position: absolute;
+  //   color: black;
+  //   width: fit-content;
+  //   transform: rotate(90deg);
+  //   left: 30%;
+  // }
+
+  .timerWrapper {
+    font-size: 8vh;
+    height: 13%;
+    width: 52%;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: yellow;
     position: absolute;
     color: black;
-    width: fit-content;
     transform: rotate(90deg);
-    left: 30%;
+    left: 25%;
   }
+
   .block {
     width: fit-content;
     height: 10%;
     transform: rotate(90deg);
     left: 50%;
+  }
+  .restTxt {
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    position: fixed;
+    left: -15%;
+    color: white;
+    font-weight: bold;
+    font-size: 7vh;
+    // background-color: red;
+    transform: rotate(90deg);
   }
   .roundTxt {
     display: inline-block;
