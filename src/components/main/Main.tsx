@@ -12,7 +12,6 @@ import WorkOutModal from './workOutModal/WorkOutModal';
 import AttendanceModal from './attendanceModal/AttendanceModal';
 import Moment from 'moment';
 import defaultProfile from './../../public/defaultProfile.png';
-import temp_image from './../../public/myimage.jpg';
 import authAPI from '../../API/authAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/module/auth';
@@ -107,7 +106,7 @@ const Main = () => {
       <AttendanceModal isModal={isAttendanceModal} setIsModal={setIsAttendanceModal} date={nowDate} />
       <div className={styles.mainContainer}>
         <div className={styles.profile}>
-          <img className={styles.userImg} src={temp_image} />
+          <img className={styles.userImg} src={defaultProfile} />
 
           {user_info == null ? (
             <></>

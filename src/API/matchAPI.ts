@@ -12,9 +12,9 @@ class matchService {
     }
   };
 
-  getMatch = async (matchId: string | undefined) => {
+  getMatch = async (inviteCode: string | undefined) => {
     try {
-      const response = await axios.get(API_URL + `/match/${matchId}/`, { headers: authHeader() });
+      const response = await axios.get(API_URL + `/match/inviteCode/${inviteCode}/`, { headers: authHeader() });
       return response.data;
     } catch (e) {
       return Promise.reject(e);

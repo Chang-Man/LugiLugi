@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { InputLabel, MenuItem, Select, Slider, TextField } from '@mui/material';
 import matchAPI from '../../API/matchAPI';
 
-import { createMatch } from '../../redux/module/match';
-
 const MakeLugiSetting = () => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
@@ -38,7 +36,7 @@ const MakeLugiSetting = () => {
           e.preventDefault();
           matchAPI.createMatch(inputValue).then(
             res => {
-              navigate(`/makelugi/${res.id}`);
+              navigate(`/makelugi/${res.inviteCode}`);
             },
             error => {
               console.log(error);

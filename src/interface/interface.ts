@@ -35,6 +35,7 @@ export interface UserGetType {
   username: string;
   nickname: string;
   code: string;
+  image: string;
 }
 
 export interface UserGetProfileType {

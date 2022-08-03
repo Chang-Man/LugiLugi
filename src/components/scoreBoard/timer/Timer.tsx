@@ -4,10 +4,36 @@ import styles from './Timer.module.scss';
 
 type TimeProps = {
   roundTime: number;
+  currentState: currentStateType;
+  setCurrentState: React.Dispatch<React.SetStateAction<currentStateType>>;
 };
 
-const Timer: React.FC<TimeProps> = ({ roundTime }) => {
+interface currentStateType {
+  roundTime: number;
+  current: boolean;
+  breakTime: boolean;
+}
+
+const Timer: React.FC<TimeProps> = ({ roundTime, currentState, setCurrentState }) => {
   const { totalSeconds, minutes, seconds, timerDispatch, timer } = useTimer(roundTime);
+
+  useEffect(() => {
+    if (currentState.current == true || currentState.breakTime) {
+      startPause(TimerAction.START);
+    } else if (!currentState.current && timer.state === TimerState.RUNNING) {
+      startPause(TimerAction.PAUSE);
+    }
+  }, [currentState]);
+
+  useEffect(() => {
+    if (minutes * 1 === 0 && seconds * 1 === 0 && currentState.breakTime) {
+      startPause(TimerAction.PAUSE);
+      setCurrentState({ ...currentState, breakTime: false });
+    } else if (minutes * 1 === 0 && seconds * 1 === 0) {
+      startPause(TimerAction.PAUSE);
+      setCurrentState({ ...currentState, roundTime: currentState.roundTime + 1, breakTime: true });
+    }
+  }, [minutes, seconds]);
 
   const startPause = (action: any) => {
     if (timer.state === TimerState.RUNNING) {
@@ -20,14 +46,6 @@ const Timer: React.FC<TimeProps> = ({ roundTime }) => {
       });
     }
   };
-
-  const styleObj = {
-    color: totalSeconds <= 45 ? 'orange' : 'black',
-  };
-
-  if (totalSeconds <= 15) {
-    styleObj.color = 'red';
-  }
 
   return (
     <div className={styles.wrapper}>
