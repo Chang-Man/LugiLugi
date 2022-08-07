@@ -1,8 +1,10 @@
 import { Stomp } from '@stomp/stompjs';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import SockJS from 'sockjs-client';
+import matchAPI from '../../API/matchAPI';
 import rootReducer from '../../redux';
 import styles from './Subref.module.scss';
 type RootState = ReturnType<typeof rootReducer>;
@@ -13,7 +15,18 @@ const Subref = () => {
   const socket = new SockJS('https://lugiserver.com/ws');
   const stompClient = Stomp.over(socket);
 
+  const navigate = useNavigate();
   useEffect(() => {
+    matchAPI.getMatch(lugicode).then(
+      res => {
+        console.log(res);
+      },
+      e => {
+        toast.dark('경기 코드를 다시 확인하세요.');
+        navigate('/joinLugi');
+        return () => stompClient.disconnect();
+      },
+    );
     stompClient.connect({}, (frame: string) => {
       console.log('Connected:' + frame);
       setTimeout(() => {

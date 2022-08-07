@@ -11,6 +11,7 @@ import SockJS from 'sockjs-client';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateScore } from '../../redux/module/match';
 import useTimer, { TimerAction, TimerState } from './timer/useTimer';
+import { toast } from 'react-toastify';
 type RootState = ReturnType<typeof rootReducer>;
 
 interface currentStateType {
@@ -99,9 +100,17 @@ const ScoreBoard = () => {
       <FaArrowLeft
         className={styles.arrow}
         onClick={() => {
-          navigate('/');
+          navigate(-1);
         }}
       />
+      <button
+        className={styles.lugicode}
+        onClick={() => {
+          setIsModal(true);
+        }}
+      >
+        코드
+      </button>
       <InviteModal isModal={isModal} setIsModal={setIsModal} match={matchOption} />
       <div className={styles.warningContainer}>
         <div className={styles.warning}>{bluePenalty}</div>
@@ -115,13 +124,36 @@ const ScoreBoard = () => {
       {!currentState.breakTime && currentState.roundTime <= matchOption.roundCount && (
         <Timer currentState={currentState} setCurrentState={setCurrentState} roundTime={matchOption.roundTime} />
       )}
-      {currentState.breakTime && <Timer currentState={currentState} setCurrentState={setCurrentState} roundTime={matchOption.breakTime} />}
-      {currentState.breakTime ? (
+      {currentState.breakTime && matchOption.roundCount !== 1 && (
+        <Timer currentState={currentState} setCurrentState={setCurrentState} roundTime={matchOption.breakTime} />
+      )}
+      {currentState.breakTime && matchOption.roundCount !== 1 ? (
         <div className={styles.restTxt}>쉬는 시간</div>
       ) : currentState.roundTime <= matchOption.roundCount ? (
         <div className={styles.roundTxt}>ROUND {currentState.roundTime}</div>
       ) : (
         <div className={styles.roundTxt}>경기 종료</div>
+      )}
+      {currentState.roundTime > matchOption.roundCount && (
+        <div className={styles.saveWrapper}>
+          <button
+            className={styles.saveButton}
+            onClick={() => {
+              matchAPI.finishMatch(inviteCode).then(
+                res => {
+                  console.log(res);
+                  toast.dark('경기가 저장되었습니다.');
+                },
+                error => {
+                  toast.dark('경기를 저장할 수 없습니다.');
+                },
+              );
+            }}
+          >
+            경기 저장
+          </button>
+          <span className={styles.saveTxt}>경기를 저장하시겠습니까?</span>
+        </div>
       )}
 
       <div className={`${styles.scoreContainer} ${styles.red} `}>

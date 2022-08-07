@@ -20,6 +20,15 @@ class matchService {
       return Promise.reject(e);
     }
   };
+
+  finishMatch = async (inviteCode: string | undefined) => {
+    try {
+      const response = await axios.post(API_URL + `/match/inviteCode/${inviteCode}/finish/`, {}, { headers: authHeader() });
+      return response.data;
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
 }
 
 export default new matchService();
