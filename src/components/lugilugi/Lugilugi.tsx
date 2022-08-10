@@ -29,7 +29,7 @@ const Lugilugi = () => {
         LUGI-LUGI
       </div>
       <div className={styles.profile}>
-        <div className={styles.userImg}></div>
+        {user_info == null ? <></> : <img className={styles.userImg} src={user_info.image} />}
         {user_info == null ? (
           <></>
         ) : (

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './AttendanceModal.module.scss';
 import { FaWindowClose } from 'react-icons/fa';
 import Cloth from '../../../public/cloth.png';
 import Moment from 'moment';
 import { UserGetType } from '../../../interface/interface';
 import UserProfile from './userProfile/UserProfile';
+import attendanceAPI from '../../../API/attendanceAPI';
+import { toast } from 'react-toastify';
 
 type ModalProps = {
   isModal: boolean;
@@ -18,13 +20,30 @@ const attendanceUsers = [
   { id: '3', username: '조은세상', nickname: '와우', code: 'Wefkde', image: '' },
 ];
 const AttendanceModal: React.FC<ModalProps> = ({ isModal, setIsModal, date }) => {
-  const formatDate = Moment(date).format('MM/DD  ');
+  const getYear = Moment(date).format('YYYY');
+  const getMonth = Moment(date).format('MM');
+  const getDay = Moment(date).format('DD');
+
+  useEffect(() => {
+    if (isModal) {
+      attendanceAPI.getAttendanceDay({ year: getYear, month: getMonth, day: getDay }).then(
+        res => {
+          console.log(res.results);
+        },
+        e => {
+          toast.dark('출석한 인원이 없습니다.');
+          setIsModal(false);
+        },
+      );
+    }
+  }, [isModal]);
+
   return (
     <div className={isModal ? styles.modalWrapper : styles.modalWrapperClosed}>
       <div className={isModal ? styles.plusModal : styles.plusModalClosed}>
         <div className={styles.navigationBar}>
           <FaWindowClose className={styles.close} size='1em' onClick={() => setIsModal(false)} />
-          {formatDate} 운동
+          {getMonth}/{getDay} 운동
         </div>
         {attendanceUsers.map(item => {
           return <UserProfile key={item.id} user={item} />;

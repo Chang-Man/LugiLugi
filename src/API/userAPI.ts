@@ -24,6 +24,15 @@ class userService {
       return Promise.reject(e);
     }
   };
+
+  saveImages = async (img: File | undefined) => {
+    try {
+      const response = await axios.post(`https://lugiserver.com/api/v1/image/me/`, img, { headers: authHeader() });
+      return response.data;
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
 }
 
 export default new userService();

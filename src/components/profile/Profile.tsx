@@ -1,10 +1,13 @@
 import styles from './Profile.module.scss';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import defaultProfile from '../../public/defaultProfile.png';
 import { useSelector } from 'react-redux';
 import rootReducer from '../../redux';
+import userAPI from '../../API/userAPI';
+import { toast } from 'react-toastify';
+
 type RootState = ReturnType<typeof rootReducer>;
 
 interface editProfileInput {
@@ -14,7 +17,6 @@ interface editProfileInput {
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [isModal, setIsModal] = useState<boolean>(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const [fileImage, setFileImage] = useState<File>();
   const user_info = useSelector((state: RootState) => state.user).user_info;
@@ -27,29 +29,74 @@ const Profile = () => {
       setImageUrl(URL.createObjectURL(e.target.files[0]));
     }
   };
+
+  const submitImage = (event: any) => {
+    event.preventDefault();
+    const formData: any = new FormData();
+    // Array.from(fileImage).forEach((f) => formData.append("image", f));
+    formData.append('image', fileImage);
+    userAPI.saveImages(formData).then(
+      res => {
+        toast.dark('프로필 이미지 변경');
+      },
+      e => {
+        toast.dark('이미지를 변경할 수 없습니다.');
+      },
+    );
+  };
+
+  const saveNames = () => {
+    userAPI.editNames(editInput).then(
+      res => {
+        navigate(-1);
+        toast.dark('수정되었습니다.');
+      },
+      e => {
+        toast.dark('수정에 실패하였습니다.');
+      },
+    );
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.navigationBar}>
         <FaArrowLeft className={styles.arrow} onClick={() => navigate('/')} />
         Profile
       </div>
-      <form className={styles.inputs}>
+      <div className={styles.inputs}>
         {!imageUrl ? (
           <img className={styles.userImg} src={defaultProfile} alt={'defaultProfile'} />
         ) : (
           <img className={styles.userImg} src={imageUrl} alt={'editedImage'} />
         )}
-        <label className={styles.fileUpload}>
-          <input
-            className={styles.editImg}
-            onChange={saveFileImage}
-            ref={fileRef}
-            type={'file'}
-            accept={'image/*'}
-            style={{ display: 'none' }}
-          />
-          이미지 편집
-        </label>
+
+        <div className={styles.selectImg}>
+          <label className={styles.fileUpload}>
+            <input
+              className={styles.editImg}
+              onChange={saveFileImage}
+              ref={fileRef}
+              type={'file'}
+              accept={'image/*'}
+              style={{ display: 'none' }}
+            />
+            이미지 수정
+          </label>
+          <div
+            className={styles.defaultImgButton}
+            onClick={() => {
+              setImageUrl('');
+            }}
+          >
+            기본 이미지
+          </div>
+        </div>
+
+        <form className={styles.editImgButtons} onSubmit={submitImage}>
+          <button className={styles.saveImg} type='submit'>
+            이미지 저장
+          </button>
+        </form>
 
         <input
           placeholder='이름'
@@ -65,8 +112,8 @@ const Profile = () => {
             setEditInput({ ...editInput, nickname: e.target.value });
           }}
         />
-        <button>수정 완료</button>
-      </form>
+        <button onClick={saveNames}>수정 완료</button>
+      </div>
     </div>
   );
 };

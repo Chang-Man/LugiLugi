@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './WorkOutModal.module.scss';
 import { FaWindowClose } from 'react-icons/fa';
 import Cloth from '../../../public/cloth.png';
 import Moment from 'moment';
-import attendance from '../../../API/attendance';
 import { toast } from 'react-toastify';
 import { subDays } from 'date-fns';
+import attendanceAPI from '../../../API/attendanceAPI';
 
 type ModalProps = {
   isModal: boolean;
@@ -28,7 +28,7 @@ const WorkOutModal: React.FC<ModalProps> = ({ isModal, setIsModal, setAttendance
           onClick={() => {
             setIsModal(false);
 
-            attendance.postAttendance({ date: postDate.toString() }).then(
+            attendanceAPI.postAttendance({ date: postDate.toString() }).then(
               res => {
                 setAttendanceDate(prevArray => [...prevArray, subDays(new Date(), 0)]);
               },

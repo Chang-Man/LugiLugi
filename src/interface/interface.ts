@@ -63,3 +63,9 @@ export interface getAttendanceMonthType {
   year: string;
   month: string;
 }
+
+export interface getAttendanceDayType {
+  year: string;
+  month: string;
+  day: string;
+}

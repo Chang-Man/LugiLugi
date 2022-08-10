@@ -20,7 +20,7 @@ import { setUser } from '../../redux/module/user';
 import rootReducer from '../../redux';
 import { FiLogOut } from 'react-icons/fi';
 import moment from 'moment';
-import attendance from '../../API/attendance';
+import attendanceAPI from '../../API/attendanceAPI';
 type RootState = ReturnType<typeof rootReducer>;
 
 interface attendanceDateObjectType {
@@ -70,7 +70,8 @@ const Main = () => {
         authAPI.logout();
       },
     );
-    attendance.getAttendanceMonth({ year: moment().format('YYYY'), month: moment().format('MM') }).then(res => {
+
+    attendanceAPI.getAttendanceMonth({ year: moment().format('YYYY'), month: moment().format('MM') }).then(res => {
       setAttendanceDate([]);
       res.results.map((res: string, idx: number) => {
         setAttendanceDate(prevArray => [...prevArray, subDays(new Date(res), 0)]);
@@ -82,7 +83,7 @@ const Main = () => {
     const yearToGet = moment(dateToPost).format('YYYY');
     const monthToGet = moment(dateToPost).format('MM');
 
-    attendance.getAttendanceMonth({ year: yearToGet, month: monthToGet }).then(res => {
+    attendanceAPI.getAttendanceMonth({ year: yearToGet, month: monthToGet }).then(res => {
       setAttendanceDate([]);
       res.results.map((res: string, idx: number) => {
         setAttendanceDate(prevArray => [...prevArray, subDays(new Date(res), 0)]);
@@ -98,15 +99,21 @@ const Main = () => {
           <span>LUGI-LUGI</span>
         </div>
         <div className={styles.status}>
-          <BsPerson className={styles.profile} size={'1.5em'} onClick={() => navigate('/profile')} />
-          <FiLogOut className={styles.menu} size={'1.5em'} onClick={onClickLogout} />
+          <BsPerson className={styles.profile} size={'5vw'} onClick={() => navigate('/profile')} />
+          <FiLogOut className={styles.menu} size={'5vw'} onClick={onClickLogout} />
         </div>
       </div>
       <WorkOutModal isModal={isModal} setIsModal={setIsModal} setAttendanceDate={setAttendanceDate} />
       <AttendanceModal isModal={isAttendanceModal} setIsModal={setIsAttendanceModal} date={nowDate} />
       <div className={styles.mainContainer}>
         <div className={styles.profile}>
-          <img className={styles.userImg} src={defaultProfile} />
+          {user_info == null ? (
+            <></>
+          ) : user_info.image ? (
+            <img className={styles.userImg} src={user_info.image} />
+          ) : (
+            <img className={styles.defaultImg} src={defaultProfile} />
+          )}
 
           {user_info == null ? (
             <></>

@@ -46,13 +46,20 @@
       display: flex;
       align-items: center;
       margin-bottom: 20px;
-      .userImg {
+      .defaultImg {
         display: inline-block;
         width: 20vw;
         height: 20vw;
         border-radius: 10vw;
         margin-right: 15%;
-        // background-color: white;
+      }
+      .userImg {
+        display: inline-block;
+        width: 20vw;
+        height: 20vw;
+        border-radius: 12vw;
+        margin-right: 15%;
+        border: 3px solid gray;
       }
       .userTxt {
         display: inline-block;
