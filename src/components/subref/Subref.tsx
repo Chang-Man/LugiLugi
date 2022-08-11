@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import SockJS from 'sockjs-client';
+import { toastErrorData } from '../../API/errorHandling';
 import matchAPI from '../../API/matchAPI';
 import rootReducer from '../../redux';
 import styles from './Subref.module.scss';
@@ -21,8 +22,8 @@ const Subref = () => {
       res => {
         console.log(res);
       },
-      e => {
-        toast.dark('경기 코드를 다시 확인하세요.');
+      error => {
+        toastErrorData(error);
         navigate('/joinLugi');
         return () => stompClient.disconnect();
       },

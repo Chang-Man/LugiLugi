@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { InputLabel, MenuItem, Select, Slider, TextField } from '@mui/material';
 import matchAPI from '../../API/matchAPI';
 import { toast } from 'react-toastify';
+import { toastErrorData } from '../../API/errorHandling';
 
 const MakeLugiSetting = () => {
   const navigate = useNavigate();
@@ -39,8 +40,8 @@ const MakeLugiSetting = () => {
             res => {
               navigate(`/makelugi/${res.inviteCode}`);
             },
-            e => {
-              toast.dark('선수 코드를 다시 확인해주세요.');
+            error => {
+              toastErrorData(error);
             },
           );
         }}

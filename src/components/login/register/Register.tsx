@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import authAPI from '../../../API/authAPI';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { toastErrorData } from '../../../API/errorHandling';
 
 const Register = () => {
   const [registerInput, setRegisterInput] = useState<RegisterInputType>({
@@ -55,7 +56,7 @@ const Register = () => {
           navigate('/');
         },
         error => {
-          toast.dark(error.response.data.detail);
+          toastErrorData(error);
         },
       );
     } else {

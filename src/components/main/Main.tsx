@@ -21,6 +21,7 @@ import rootReducer from '../../redux';
 import { FiLogOut } from 'react-icons/fi';
 import moment from 'moment';
 import attendanceAPI from '../../API/attendanceAPI';
+import { toastErrorData } from '../../API/errorHandling';
 type RootState = ReturnType<typeof rootReducer>;
 
 interface attendanceDateObjectType {
@@ -67,16 +68,22 @@ const Main = () => {
     userAPI.getUser().then(
       res => dispatch(setUser(res)),
       error => {
+        toastErrorData(error);
         authAPI.logout();
       },
     );
 
-    attendanceAPI.getAttendanceMonth({ year: moment().format('YYYY'), month: moment().format('MM') }).then(res => {
-      setAttendanceDate([]);
-      res.results.map((res: string, idx: number) => {
-        setAttendanceDate(prevArray => [...prevArray, subDays(new Date(res), 0)]);
-      });
-    });
+    attendanceAPI.getAttendanceMonth({ year: moment().format('YYYY'), month: moment().format('MM') }).then(
+      res => {
+        setAttendanceDate([]);
+        res.results.map((res: string, idx: number) => {
+          setAttendanceDate(prevArray => [...prevArray, subDays(new Date(res), 0)]);
+        });
+      },
+      error => {
+        toastErrorData(error);
+      },
+    );
   }, []);
 
   useEffect(() => {
