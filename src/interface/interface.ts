@@ -40,6 +40,7 @@ export interface UserGetType {
 
 export interface UserGetProfileType {
   id: string;
+  email: string;
   username: string;
   nickname: string;
   code: string;
