@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import rootReducer from '../../redux';
 import userAPI from '../../API/userAPI';
 import { toast } from 'react-toastify';
+import { toastErrorData } from '../../API/errorHandling';
 
 type RootState = ReturnType<typeof rootReducer>;
 
@@ -33,14 +34,14 @@ const Profile = () => {
   const submitImage = (event: any) => {
     event.preventDefault();
     const formData: any = new FormData();
-    // Array.from(fileImage).forEach((f) => formData.append("image", f));
+
     formData.append('image', fileImage);
     userAPI.saveImages(formData).then(
       res => {
         toast.dark('프로필 이미지 변경');
       },
-      e => {
-        toast.dark('이미지를 변경할 수 없습니다.');
+      error => {
+        toastErrorData(error);
       },
     );
   };
@@ -85,7 +86,14 @@ const Profile = () => {
           <div
             className={styles.defaultImgButton}
             onClick={() => {
-              setImageUrl('');
+              userAPI.saveDefaultImage().then(
+                res => {
+                  navigate(-1);
+                },
+                error => {
+                  toast.dark('실패하였습니다.');
+                },
+              );
             }}
           >
             기본 이미지

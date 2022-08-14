@@ -21,6 +21,7 @@ import rootReducer from '../../redux';
 import { FiLogOut } from 'react-icons/fi';
 import moment from 'moment';
 import attendanceAPI from '../../API/attendanceAPI';
+import { toastErrorData } from '../../API/errorHandling';
 import lovePanda from '../../public/love_panda.png';
 type RootState = ReturnType<typeof rootReducer>;
 
@@ -36,7 +37,7 @@ const Main = () => {
   const [isAttendanceModal, setIsAttendanceModal] = useState<boolean>(false);
   const [attendanceDate, setAttendanceDate] = useState<Date[]>([]);
   const [dateToPost, setDateToPost] = useState<Date>();
-  const formatDate = Moment(nowDate).format('YYYY/MM');
+  const [formatDate, setFormatDate] = useState(Moment(nowDate).format('YYYY/MM'));
   const dispatch = useDispatch();
   const user_info = useSelector((state: RootState) => state.user).user_info;
 
@@ -45,39 +46,31 @@ const Main = () => {
     dispatch(logout());
   };
 
-  const array = [
-    {
-      id: 1,
-      date: '07/7/2022',
-    },
-    {
-      id: 2,
-      date: '07/14/2022',
-    },
-    {
-      id: 3,
-      date: '07/21/2022',
-    },
-  ];
-
   const handleMonthChange = (date: Date) => {
     setDateToPost(date);
+    setFormatDate(Moment(date).format('YYYY/MM'));
   };
 
   useEffect(() => {
     userAPI.getUser().then(
       res => dispatch(setUser(res)),
       error => {
+        toastErrorData(error);
         authAPI.logout();
       },
     );
 
-    attendanceAPI.getAttendanceMonth({ year: moment().format('YYYY'), month: moment().format('MM') }).then(res => {
-      setAttendanceDate([]);
-      res.results.map((res: string, idx: number) => {
-        setAttendanceDate(prevArray => [...prevArray, subDays(new Date(res), 0)]);
-      });
-    });
+    attendanceAPI.getAttendanceMonth({ year: moment().format('YYYY'), month: moment().format('MM') }).then(
+      res => {
+        setAttendanceDate([]);
+        res.results.map((res: string, idx: number) => {
+          setAttendanceDate(prevArray => [...prevArray, subDays(new Date(res), 0)]);
+        });
+      },
+      error => {
+        toastErrorData(error);
+      },
+    );
   }, []);
 
   useEffect(() => {

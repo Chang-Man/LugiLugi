@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../redux/module/auth';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { toastErrorData } from '../../API/errorHandling';
 
 const Login = () => {
   const [loginInput, setLoginInput] = useState({ email: '', password: '' });
@@ -19,7 +20,8 @@ const Login = () => {
         dispatch(login(token));
       },
       error => {
-        toast.dark('로그인 시도를 다시 하세요');
+        toastErrorData(error);
+        // toast.dark('로그인 시도를 다시 하세요');
       },
     );
   };

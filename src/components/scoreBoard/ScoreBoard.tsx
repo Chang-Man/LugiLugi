@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateScore } from '../../redux/module/match';
 import useTimer, { TimerAction, TimerState } from './timer/useTimer';
 import { toast } from 'react-toastify';
+import { toastErrorData } from '../../API/errorHandling';
 type RootState = ReturnType<typeof rootReducer>;
 
 interface currentStateType {
@@ -56,9 +57,14 @@ const ScoreBoard = () => {
   }, []);
 
   useEffect(() => {
-    matchAPI.getMatch(inviteCode).then(res => {
-      setMatchOption(res);
-    });
+    matchAPI.getMatch(inviteCode).then(
+      res => {
+        setMatchOption(res);
+      },
+      error => {
+        toastErrorData(error);
+      },
+    );
 
     const socket = new SockJS('https://lugiserver.com/ws');
     const stompClient = Stomp.over(socket);
@@ -141,11 +147,10 @@ const ScoreBoard = () => {
             onClick={() => {
               matchAPI.finishMatch(inviteCode).then(
                 res => {
-                  console.log(res);
                   toast.dark('경기가 저장되었습니다.');
                 },
                 error => {
-                  toast.dark('경기를 저장할 수 없습니다.');
+                  toastErrorData(error);
                 },
               );
             }}

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styles from './JoinLugi.module.scss';
 import { FaArrowLeft } from 'react-icons/fa';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { TextField } from '@mui/material';
 import Logo from '../../public/tkdmark.jpg';
+import { toast } from 'react-toastify';
 
 const JoinLugi = () => {
   const navigate = useNavigate();
@@ -15,12 +16,7 @@ const JoinLugi = () => {
         <FaArrowLeft className={styles.arrow} onClick={() => navigate('/lugilugi')} />
         경기 참여
       </div>
-      <form
-        className={styles.inputs}
-        onSubmit={() => {
-          navigate(`/joinLugi/${codeInput}`);
-        }}
-      >
+      <div className={styles.inputs}>
         <img src={Logo} alt={'logo'} className={styles.logo} />
 
         <br />
@@ -44,8 +40,15 @@ const JoinLugi = () => {
           autoComplete='off'
         />
 
-        <button>완료</button>
-      </form>
+        <button
+          onClick={() => {
+            if (codeInput) navigate(`/joinLugi/${codeInput}`);
+            else toast.dark('초대코드를 입력하세요.');
+          }}
+        >
+          완료
+        </button>
+      </div>
     </div>
   );
 };
