@@ -86,7 +86,14 @@ const Profile = () => {
           <div
             className={styles.defaultImgButton}
             onClick={() => {
-              setImageUrl('');
+              userAPI.saveDefaultImage().then(
+                res => {
+                  navigate(-1);
+                },
+                error => {
+                  toast.dark('실패하였습니다.');
+                },
+              );
             }}
           >
             기본 이미지

@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserGetProfileType } from '../../../../interface/interface';
 import styles from './UserProfile.module.scss';
+import defaultImg from '../../../../public/defaultProfile.png';
 
 type ModalProps = {
   user: UserGetProfileType;
@@ -9,7 +10,11 @@ type ModalProps = {
 const UserProfile = ({ user }: ModalProps) => {
   return (
     <div className={styles.profile}>
-      <img className={styles.userImg} src={user.image} alt={'img'} />
+      {user.image ? (
+        <img className={styles.userImg} src={user.image} alt={'img'} />
+      ) : (
+        <img className={styles.userImg} src={defaultImg} alt={'defaultImg'} />
+      )}
 
       <div className={styles.userTxt}>
         <span className={styles.user}>{user.username}</span>

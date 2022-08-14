@@ -33,6 +33,15 @@ class userService {
       return Promise.reject(e);
     }
   };
+
+  saveDefaultImage = async () => {
+    try {
+      const response = await axios.post(`https://lugiserver.com/api/v1/image/me/default/`, null, { headers: authHeader() });
+      return response.data;
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
 }
 
 export default new userService();
