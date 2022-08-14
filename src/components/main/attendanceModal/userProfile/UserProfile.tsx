@@ -9,7 +9,8 @@ type ModalProps = {
 const UserProfile = ({ user }: ModalProps) => {
   return (
     <div className={styles.profile}>
-      <div className={styles.userImg}></div>
+      <img className={styles.userImg} src={user.image} alt={'img'} />
+
       <div className={styles.userTxt}>
         <span className={styles.user}>{user.username}</span>
         <span className={styles.cuteName}></span>

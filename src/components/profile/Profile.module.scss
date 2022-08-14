@@ -23,25 +23,20 @@
       height: 45vw;
       border-radius: 40vw;
       margin-bottom: 10%;
+      border: 3px solid gray;
     }
 
-    .fileUpload {
-      margin: 0;
-      margin-bottom: 30%;
-      font-size: 4vw;
-      color: rgba(255, 255, 255, 0.5);
-    }
     @include input-default;
     input {
       width: 100%;
       color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 10%;
-      font-size: 5vw;
+      margin-bottom: 4vw;
+      font-size: 100%;
     }
     button {
       @include button-default;
       width: 60%;
-      font-size: 5vw;
+      font-size: 100%;
       margin-top: 10%;
     }
     select {
@@ -57,10 +52,35 @@
     select:focus {
       outline: none;
     }
-    .noGroup {
-      color: white;
-      font-size: 80%;
-      margin-bottom: 10%;
+  }
+
+  .selectImg {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    .fileUpload {
+      margin: 0;
+      font-size: 4vw;
+      color: rgba(255, 255, 255, 0.5);
     }
+    .defaultImgButton {
+      margin: 0;
+      font-size: 4vw;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    margin-bottom: 10%;
+  }
+  .editImgButtons {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+
+    .saveImg {
+      margin: 0;
+      width: auto;
+    }
+    margin-bottom: 20%;
   }
 }

@@ -33,6 +33,7 @@ function App() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }, []);
   const auth = useSelector((state: RootState) => state.auth).isLoggedIn;
+
   return (
     <div className='App'>
       <Desktop>

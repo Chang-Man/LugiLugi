@@ -40,6 +40,7 @@ export interface UserGetType {
 
 export interface UserGetProfileType {
   id: string;
+  email: string;
   username: string;
   nickname: string;
   code: string;
@@ -62,4 +63,10 @@ export interface postAttendanceType {
 export interface getAttendanceMonthType {
   year: string;
   month: string;
+}
+
+export interface getAttendanceDayType {
+  year: string;
+  month: string;
+  day: string;
 }

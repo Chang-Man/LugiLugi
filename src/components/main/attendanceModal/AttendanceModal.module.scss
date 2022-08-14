@@ -1,4 +1,5 @@
 @import '../../../styles/mixins.scss';
+
 .modalWrapper {
   position: fixed;
   top: 0;
@@ -16,6 +17,9 @@
   visibility: visible;
   transition: 0.3s all;
 
+  .plusModal::-webkit-scrollbar {
+    display: none;
+  }
   .plusModal {
     display: block;
     width: 70vw;
@@ -25,9 +29,12 @@
     visibility: visible;
     border-radius: 20px;
     overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
     .navigationBar {
-      height: 17%;
+      width: 70vw;
+      height: 13vw;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
       display: flex;
@@ -36,6 +43,7 @@
       font-size: 150%;
       color: white;
       margin-bottom: 10%;
+
       .close {
         margin-left: 10px;
         margin-right: 5%;
