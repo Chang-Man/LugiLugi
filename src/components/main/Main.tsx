@@ -22,6 +22,7 @@ import { FiLogOut } from 'react-icons/fi';
 import moment from 'moment';
 import attendanceAPI from '../../API/attendanceAPI';
 import { toastErrorData } from '../../API/errorHandling';
+import lovePanda from '../../public/love_panda.png';
 type RootState = ReturnType<typeof rootReducer>;
 
 interface attendanceDateObjectType {
@@ -126,11 +127,17 @@ const Main = () => {
             <></>
           ) : (
             <div className={styles.userTxt}>
-              <span className={styles.user}>{user_info.username}</span>
-              <span className={styles.cuteName}></span>
-              <span className={styles.slash}>/</span>
-              <span className={styles.code}>{user_info.code}</span>
-              <br />
+              <div className={styles.name_code}>
+                {/* <span></span> */}
+                <span className={styles.user}>
+                  {user_info.username === '강다연' && <span>😘</span>}
+                  {user_info.username}
+                </span>
+                <span className={styles.cuteName}></span>
+                <span className={styles.slash}>/</span>
+                <span className={styles.code}>{user_info.code}</span>
+              </div>
+
               <span className={styles.nickName}>{user_info.nickname}</span>
             </div>
           )}
@@ -165,10 +172,12 @@ const Main = () => {
       `}
         </style>
         <div className={styles.count}>
-          <span>{formatDate} 운동</span>
-          <span className={styles.slash}>:</span>
-          <span>{attendanceDate.length}회</span>
+          <span>
+            {formatDate} 운동 : &nbsp;{attendanceDate.length}회
+          </span>
+          {user_info && user_info.username === '강다연' && <img className={styles.hiddenPanda} src={lovePanda} alt={'dayeon'} />}
         </div>
+
         <Datepicker
           className='form-control'
           selected={nowDate}
