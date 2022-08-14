@@ -6,6 +6,7 @@ import Moment from 'moment';
 import { toast } from 'react-toastify';
 import { subDays } from 'date-fns';
 import attendanceAPI from '../../../API/attendanceAPI';
+import { toastErrorData } from '../../../API/errorHandling';
 
 type ModalProps = {
   isModal: boolean;
@@ -33,7 +34,7 @@ const WorkOutModal: React.FC<ModalProps> = ({ isModal, setIsModal, setAttendance
                 setAttendanceDate(prevArray => [...prevArray, subDays(new Date(), 0)]);
               },
               error => {
-                toast.dark('예상치 못한 오류로, 운동에 참여할 수 없습니다');
+                toastErrorData(error);
               },
             );
           }}
