@@ -23,6 +23,7 @@ import moment from 'moment';
 import attendanceAPI from '../../API/attendanceAPI';
 import { toastErrorData } from '../../API/errorHandling';
 import lovePanda from '../../public/love_panda.png';
+import facePanda from '../../public/face_panda.png';
 type RootState = ReturnType<typeof rootReducer>;
 
 interface attendanceDateObjectType {
@@ -116,7 +117,7 @@ const Main = () => {
               <div className={styles.name_code}>
                 {/* <span></span> */}
                 <span className={styles.user}>
-                  {user_info.username === '강다연' && <span>😘</span>}
+                  {user_info.username === '강다연' && <img className={styles.facepanda} src={facePanda} alt={'facepanda'} />}
                   {user_info.username}
                 </span>
                 <span className={styles.cuteName}></span>
