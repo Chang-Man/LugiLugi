@@ -53,6 +53,13 @@
         border-radius: 10vw;
         margin-right: 15%;
       }
+      .user {
+        display: flex;
+        align-items: center;
+        .facepanda {
+          width: 50px;
+        }
+      }
       .userImg {
         display: inline-block;
         width: 20vw;
@@ -86,6 +93,7 @@
     .hiddenPanda {
       width: 20%;
     }
+
     .count {
       width: fit-content;
       margin-bottom: 3%;
