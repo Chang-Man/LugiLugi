@@ -43,7 +43,7 @@ const WorkOutModal: React.FC<ModalProps> = ({ isModal, setIsModal, setAttendance
             );
           }}
         >
-          {user_info.username == '강다연' ? (
+          {user_info && user_info.username == '강다연' ? (
             <img className={styles.cloth} src={exitingPanda} alt='dayeon' />
           ) : (
             <img className={styles.cloth} src={Cloth} />
